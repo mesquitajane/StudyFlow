@@ -5,24 +5,30 @@
     x:Class="StudyFlow.LoadingPage"
     BackgroundColor="#E8F5E9">
 
-    <VerticalStackLayout VerticalOptions="Center"
+    <Grid>
+
+        <VerticalStackLayout 
+                         VerticalOptions="Center"
                          HorizontalOptions="Center"
-                         Padding="30"
-                         Spacing="25">
+                         Spacing="25"
+                         WidthRequest="250">
 
-        <Image Source="carregamento.png"
-               HeightRequest="150"
-               HorizontalOptions="Center" 
-               Aspect="AspectFit" />
 
-        <ProgressBar x:Name="barraProgresso"
+            <Image Source="carregamento.png"
+               HeightRequest="160"
+               Aspect="AspectFit"
+               HorizontalOptions="Center" />
+
+
+            <ProgressBar x:Name="barraProgresso"
                      Progress="0"
                      HeightRequest="10"
-                     WidthRequest="250"
-                     HorizontalOptions="Center"
+                     HorizontalOptions="Fill"
                      BackgroundColor="#C8E6C9"
                      ProgressColor="#2E7D32" />
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+
+    </Grid>
 
 </ContentPage>

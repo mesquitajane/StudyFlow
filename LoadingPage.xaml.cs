@@ -16,6 +16,6 @@ public partial class LoadingPage : ContentPage
             await Task.Delay(30); // controla a velocidade
         }
 
-        await Shell.Current.GoToAsync("//LoginPage");
+        await Shell.Current.GoToAsync("//InicioPage");
     }
 }
