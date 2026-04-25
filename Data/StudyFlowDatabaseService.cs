@@ -43,6 +43,18 @@ public class StudyFlowDatabaseService
         return await _database!.InsertAsync(professor);
     }
 
+    public async Task<int> InserirResponsavelAsync(Responsavel responsavel)
+    {
+        await InitAsync();
+        return await _database!.InsertAsync(responsavel);
+    }
+
+    public async Task<int> InserirSecretariaAsync(Secretaria secretaria)
+    {
+        await InitAsync();
+        return await _database!.InsertAsync(secretaria);
+    }
+
     public async Task<int> InserirTarefaAsync(Tarefa tarefa)
     {
         await InitAsync();

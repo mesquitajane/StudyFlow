@@ -1,0 +1,28 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.Dashboards.AlunoDashboard"
+             Title="Portal do Aluno"
+             BackgroundColor="#F1F8E9">
+
+    <Grid RowDefinitions="Auto, *" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,20">
+            <Label x:Name="lblBoasVindas" Text="Olá, Aluno!" FontSize="24" FontAttributes="Bold" TextColor="#2E7D32"/>
+            <Label Text="Aqui estão suas tarefas de hoje:" FontSize="14" TextColor="#666"/>
+        </VerticalStackLayout>
+
+        <Label x:Name="lblBoasVindas" 
+       Text="" 
+       FontSize="24" 
+       TextColor="#2E7D32" 
+       FontAttributes="Bold" />
+
+        <ScrollView Grid.Row="1">
+            <FlexLayout Direction="Column" AlignContent="Center">
+                <Button Text="Minhas Notas" Margin="5" BackgroundColor="#2E7D32" />
+                <Button Text="Ver Tarefas" Margin="5" BackgroundColor="#2E7D32" />
+                <Button Text="Relatório Comportamental" Margin="5" BackgroundColor="#2E7D32" />
+                <Button Text="Sair" Clicked="OnSairClicked" Margin="5" BackgroundColor="#C62828" />
+            </FlexLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

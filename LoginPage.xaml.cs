@@ -1,5 +1,6 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
+using StudyFlow.Views.Dashboards;
 
 namespace StudyFlow;
 
@@ -45,26 +46,19 @@ public partial class LoginPage : ContentPage
         await DisplayAlert("Sucesso", $"Bem-vindo {usuario.TipoUsuario}", "OK");
 
         // Por enquanto só mostra o tipo
-        switch (usuario.TipoUsuario.ToLower())
+        switch (usuario.TipoUsuario)
         {
-            case "aluno":
-                await DisplayAlert("Login", "Usuário é ALUNO", "OK");
+            case "Aluno":
+                Application.Current.MainPage = new NavigationPage(new AlunoDashboard(usuario));
                 break;
-
-            case "professor":
-                await DisplayAlert("Login", "Usuário é PROFESSOR", "OK");
+            case "Professor":
+                Application.Current.MainPage = new NavigationPage(new ProfessorDashboard(usuario));
                 break;
-
-            case "responsavel":
-                await DisplayAlert("Login", "Usuário é RESPONSÁVEL", "OK");
+            case "Secretaria":
+                Application.Current.MainPage = new NavigationPage(new SecretariaDashboard(usuario));
                 break;
-
-            case "secretaria":
-                await DisplayAlert("Login", "Usuário é SECRETARIA", "OK");
-                break;
-
-            default:
-                await DisplayAlert("Login", "Tipo desconhecido", "OK");
+            case "Responsável":
+                Application.Current.MainPage = new NavigationPage(new ResponsavelDashboard(usuario));
                 break;
         }
     }

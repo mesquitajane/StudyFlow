@@ -1,3 +1,5 @@
+using StudyFlow.Views;
+
 namespace StudyFlow;
 
 public partial class InicioPage : ContentPage
@@ -14,6 +16,6 @@ public partial class InicioPage : ContentPage
 
     private async void Cadastrar_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Cadastro", "Tela de cadastro ainda será criada", "OK");
+        await Navigation.PushAsync(new RegisterPage());
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.RegisterPage"
+             BackgroundColor="#E8F5E9"
+             Title="Cadastro">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15">
+
+            <Image Source="ok.png" HeightRequest="100" HorizontalOptions="Center" />
+
+            <Label Text="Criar Conta"
+                   FontSize="28"
+                   HorizontalOptions="Center"
+                   TextColor="#2E7D32"
+                   FontAttributes="Bold"/>
+
+            <Entry x:Name="entryNome" 
+                   Placeholder="Nome Completo" 
+                   TextColor="#212121" 
+                   PlaceholderColor="#81C784" />
+
+            <Entry x:Name="entryEmail" 
+                   Placeholder="E-mail" 
+                   Keyboard="Email"
+                   TextColor="#212121" 
+                   PlaceholderColor="#81C784" />
+
+            <Entry x:Name="entrySenha" 
+                   Placeholder="Senha" 
+                   IsPassword="True"
+                   TextColor="#212121" 
+                   PlaceholderColor="#81C784" />
+
+            <Label Text="Tipo de Usuário:" TextColor="#2E7D32" FontAttributes="Bold" />
+            <Picker x:Name="pickerTipo" 
+                    Title="Selecione..." 
+                    TextColor="#212121"
+                    SelectedIndexChanged="OnTipoUsuarioChanged">
+                <Picker.Items>
+                    <x:String>Aluno</x:String>
+                    <x:String>Professor</x:String>
+                    <x:String>Responsável</x:String>
+                    <x:String>Secretaria</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <BoxView HeightRequest="1" Color="#2E7D32" Opacity="0.2" />
+
+            <VerticalStackLayout x:Name="layoutAluno" IsVisible="False">
+                <Entry x:Name="entryTurma" Placeholder="Turma (ex: 9º Ano B)" TextColor="#212121" PlaceholderColor="#81C784" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="layoutProfessor" IsVisible="False">
+                <Entry x:Name="entryDisciplina" Placeholder="Disciplina (ex: História)" TextColor="#212121" PlaceholderColor="#81C784" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="layoutResponsavel" IsVisible="False">
+                <Entry x:Name="entryParentesco" Placeholder="Parentesco (ex: Pai/Mãe)" TextColor="#212121" PlaceholderColor="#81C784" />
+            </VerticalStackLayout>
+
+            <Button Text="CADASTRAR" 
+                    Clicked="OnRegisterClicked"
+                    BackgroundColor="#2E7D32"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    Margin="0,10,0,0"/>
+
+            <Button Text="VOLTAR" 
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#2E7D32" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
