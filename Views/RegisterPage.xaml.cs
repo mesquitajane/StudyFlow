@@ -1,5 +1,5 @@
 using StudyFlow.Data.Models;
-using StudyFlow.Data; // Certifique-se de que o namespace do seu serviço de banco está correto
+using StudyFlow.Data; 
 
 namespace StudyFlow.Views;
 
@@ -53,7 +53,6 @@ public partial class RegisterPage : ContentPage
             };
 
             // 3. Salvar Usuário no Banco
-            // Nota: O método de inserção deve retornar o ID gerado ou preencher o objeto
             await _db.InserirUsuarioAsync(novoUsuario);
 
             // 4. Salvar dados específicos baseados no tipo

@@ -19,12 +19,16 @@
 
         <Entry x:Name="entryEmail"
                Placeholder="E-mail"
-               Keyboard="Email"/>
+               Keyboard="Email"
+               TextColor="#212121" 
+               PlaceholderColor="#81C784"/>
 
         <Entry x:Name="entrySenha"
                Placeholder="Senha"
-               IsPassword="True"/>
-
+               IsPassword="True"
+               TextColor="#212121"
+               PlaceholderColor="#81C784"/>
+        
         <Button Text="Entrar" Clicked="OnLoginClicked"
                 BackgroundColor="#2E7D32"
                 TextColor="White"/>

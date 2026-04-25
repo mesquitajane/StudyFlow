@@ -1,12 +1,28 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.ResponsavelDashboard"
-             Title="ResponsavelDashboard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="StudyFlow.Views.Dashboards.ResponsavelDashboard"
+             BackgroundColor="#E8F5E9">
+
+    <Grid RowDefinitions="Auto, *" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,20">
+            <Label x:Name="lblBoasVindas" Text="Olá!" FontSize="24" FontAttributes="Bold" TextColor="#1B5E20"/>
+            <Label Text="Acompanhe o progresso do seu dependente" FontSize="14" TextColor="#666"/>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15">
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Boletim Escolar" FontAttributes="Bold" TextColor="#2E7D32"/>
+                        <Label Text="Visualize notas e faltas atualizadas." FontSize="12"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="Ver Comportamento" BackgroundColor="#2E7D32" TextColor="White"/>
+                <Button Text="Comunicados da Escola" BackgroundColor="#2E7D32" TextColor="White"/>
+                <Button Text="Falar com a Secretaria" BackgroundColor="#2E7D32" TextColor="White"/>
+                <Button Text="Sair" Clicked="OnSairClicked" BackgroundColor="#C62828" TextColor="White" Margin="0,20,0,0"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

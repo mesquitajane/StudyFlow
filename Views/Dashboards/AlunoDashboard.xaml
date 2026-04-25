@@ -1,7 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudyFlow.Views.Dashboards.AlunoDashboard"
-             Title="Portal do Aluno"
              BackgroundColor="#F1F8E9">
 
     <Grid RowDefinitions="Auto, *" Padding="20">
@@ -10,11 +9,6 @@
             <Label Text="Aqui estão suas tarefas de hoje:" FontSize="14" TextColor="#666"/>
         </VerticalStackLayout>
 
-        <Label x:Name="lblBoasVindas" 
-       Text="" 
-       FontSize="24" 
-       TextColor="#2E7D32" 
-       FontAttributes="Bold" />
 
         <ScrollView Grid.Row="1">
             <FlexLayout Direction="Column" AlignContent="Center">

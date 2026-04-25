@@ -65,6 +65,6 @@ public partial class LoginPage : ContentPage
 
      private async void Button_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//InicioPage");
+        Application.Current.MainPage = new NavigationPage(new InicioPage());
     }
 }

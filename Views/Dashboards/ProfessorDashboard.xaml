@@ -1,12 +1,22 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.ProfessorDashboard"
-             Title="ProfessorDashboard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="StudyFlow.Views.Dashboards.ProfessorDashboard"
+             BackgroundColor="#E8F5E9">
+
+    <Grid RowDefinitions="Auto, *" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,20">
+            <Label x:Name="lblBoasVindas" Text="Olá, Professor!" FontSize="24" FontAttributes="Bold" TextColor="#2E7D32"/>
+            <Label x:Name="lblDisciplina" Text="Disciplina: Carregando..." FontSize="16" TextColor="#4CAF50"/>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Lançar Notas" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Relatório Comportamental" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Minhas Turmas" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Cadastrar Tarefa" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Sair" Clicked="OnSairClicked" BackgroundColor="#C62828" TextColor="White" Margin="0,20,0,0"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
