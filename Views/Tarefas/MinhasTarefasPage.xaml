@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.Tarefas.MinhasTarefasPage"
+             BackgroundColor="#E8F5E9">
+
+    <Grid RowDefinitions="Auto, *">
+       
+        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="5">
+            <Label Text="Suas Atividades" FontSize="26" FontAttributes="Bold" TextColor="#2E7D32" />
+            <Label x:Name="lblQuantidade" Text="Carregando tarefas..." TextColor="#666" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" x:Name="listTarefas" Margin="10,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White" 
+                           HasShadow="True" 
+                           CornerRadius="10" 
+                           Margin="5,8" 
+                           Padding="15">
+                        <VerticalStackLayout Spacing="5">
+                            <HorizontalStackLayout Spacing="10">
+                                
+                                <BoxView WidthRequest="12" HeightRequest="12" 
+                                         CornerRadius="6" VerticalOptions="Center" 
+                                         BackgroundColor="#2E7D32" />
+                                <Label Text="{Binding Titulo}" FontSize="18" 
+                                       FontAttributes="Bold" TextColor="#212121" />
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding Descricao}" FontSize="14" 
+                                   TextColor="#555" MaxLines="2" LineBreakMode="TailTruncation" />
+
+                            <HorizontalStackLayout Spacing="20" Margin="0,5,0,0">
+                                <Label Text="{Binding DataEntrega, StringFormat='Prazo: {0:dd/MM/yyyy}'}" 
+                                       FontSize="12" FontAttributes="Bold" TextColor="#C62828" />
+
+                                <Label Text="{Binding Status}" FontSize="12" 
+                                       TextColor="#2E7D32" HorizontalOptions="EndAndExpand" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+           
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="50">
+                    <Label Text="Nenhuma tarefa encontrada!" TextColor="#2E7D32" 
+                           FontSize="18" HorizontalTextAlignment="Center" />
+                    <Label Text="Você está em dia com seus estudos." TextColor="#666" 
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+</ContentPage>

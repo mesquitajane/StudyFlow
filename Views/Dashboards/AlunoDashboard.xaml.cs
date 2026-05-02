@@ -1,4 +1,5 @@
 using StudyFlow.Data.Models;
+using StudyFlow.Views.Tarefas;
 
 namespace StudyFlow.Views.Dashboards;
 
@@ -23,8 +24,8 @@ public partial class AlunoDashboard : ContentPage
         Application.Current.MainPage = new NavigationPage(new LoginPage());
     }
 
-    private void OnVerTarefasClicked(object sender, EventArgs e)
+    private async void OnVerTarefasClicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new MinhasTarefasPage(_usuarioLogado));
     }
 }
