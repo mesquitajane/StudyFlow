@@ -22,4 +22,9 @@ public partial class AlunoDashboard : ContentPage
         // Volta para a tela de login resetando a pilha
         Application.Current.MainPage = new NavigationPage(new LoginPage());
     }
+
+    private void OnVerTarefasClicked(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -14,7 +14,7 @@
                 <Button Text="Lançar Notas" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
                 <Button Text="Relatório Comportamental" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
                 <Button Text="Minhas Turmas" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
-                <Button Text="Cadastrar Tarefa" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Cadastrar Tarefa" Clicked="OnCadastrarTarefaClicked" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
                 <Button Text="Sair" Clicked="OnSairClicked" BackgroundColor="#C62828" TextColor="White" Margin="0,20,0,0"/>
             </VerticalStackLayout>
         </ScrollView>

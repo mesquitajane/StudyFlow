@@ -72,4 +72,10 @@ public class StudyFlowDatabaseService
         await InitAsync();
         return await _database!.Table<Tarefa>().ToListAsync();
     }
+
+    public async Task<List<Professor>> ListarProfessoresAsync()
+    {
+        await InitAsync();
+        return await _database!.Table<Professor>().ToListAsync();
+    }
 }
