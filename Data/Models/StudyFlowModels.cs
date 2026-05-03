@@ -83,6 +83,7 @@ public class Tarefa
 
     [NotNull]
     public string Status { get; set; } = string.Empty;
+    public string Turma { get; set; } = string.Empty;
 
     [Indexed, NotNull]
     public int IdAluno { get; set; }
