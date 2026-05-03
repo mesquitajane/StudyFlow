@@ -1,7 +1,7 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
 
-namespace StudyFlow.Views.Dashboards;
+namespace StudyFlow.Views;
 
 public partial class CadastrarTarefaPage : ContentPage
 {
@@ -19,7 +19,7 @@ public partial class CadastrarTarefaPage : ContentPage
     {
         if (string.IsNullOrEmpty(entryTitulo.Text))
         {
-            await DisplayAlert("Erro", "Digite um tÌtulo.", "OK");
+            await DisplayAlert("Erro", "Digite um t√≠tulo.", "OK");
             return;
         }
 
@@ -30,7 +30,7 @@ public partial class CadastrarTarefaPage : ContentPage
 
         if (professor == null)
         {
-            await DisplayAlert("Erro", "Professor n„o encontrado!", "OK");
+            await DisplayAlert("Erro", "Professor n√£o encontrado!", "OK");
             return;
         }
 
@@ -40,7 +40,7 @@ public partial class CadastrarTarefaPage : ContentPage
             Descricao = entryDescricao.Text,
             DataEntrega = dateEntrega.Date,
             Status = "Pendente",
-            IdProfessor = professor.IdProfessor
+            Turma = entryTurma.Text
         };
 
         await _db.InserirTarefaAsync(tarefa);
