@@ -1,0 +1,56 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.TarefasAlunoPage"
+             BackgroundColor="#E8F5E9">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Minhas Tarefas"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#2E7D32"
+               HorizontalOptions="Center"/>
+
+        <CollectionView x:Name="listaTarefas">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10"
+                           Margin="5"
+                           BackgroundColor="White"
+                           CornerRadius="10">
+
+                        <VerticalStackLayout>
+
+                            <Label Text="{Binding Titulo}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="{Binding Descricao}"
+                                   FontSize="14"/>
+
+                            <Label Text="{Binding DataEntrega, StringFormat='{0:dd/MM/yyyy}'}"
+                                   FontSize="12"
+                                   TextColor="Gray"/>
+
+                            <Label Text="{Binding Status}"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#2E7D32"/>
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Voltar"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                Clicked="OnVoltarClicked"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
