@@ -1,8 +1,7 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
-using System.Collections.ObjectModel;
 
-namespace StudyFlow.Views.Tarefas;
+namespace StudyFlow.Views;
 
 public partial class MinhasTarefasPage : ContentPage
 {
@@ -14,39 +13,66 @@ public partial class MinhasTarefasPage : ContentPage
         InitializeComponent();
         _db = new StudyFlowDatabaseService();
         _usuario = usuario;
-
-        CarregarTarefas();
     }
 
-    private async void CarregarTarefas()
+    protected override async void OnAppearing()
     {
-        try
+        base.OnAppearing();
+
+        var professores = await _db.ListarProfessoresAsync();
+
+        var professor = professores.FirstOrDefault(p => p.IdUsuario == _usuario.IdUsuario);
+
+        if (professor == null)
         {
-            await _db.InitAsync();
-
-            // 1. Pede ID do Aluno vinculado a este Usu·rio
-            var alunos = await _db.ListarAlunosAsync();
-            var alunoLogado = alunos.FirstOrDefault(a => a.IdUsuario == _usuario.IdUsuario);
-
-            if (alunoLogado == null)
-            {
-                await DisplayAlert("Erro", "Perfil de aluno n„o encontrado.", "OK");
-                return;
-            }
-
-            // 2. Busca todas as tarefas
-            var todasTarefas = await _db.ListarTarefasAsync();
-
-            // 3. Filtrar as tarefas que pertencem a este aluno (ou ‡ turma dele)
-            var tarefasDoAluno = todasTarefas.Where(t => t.IdAluno == alunoLogado.IdAluno).ToList();
-
-            // Atualizar a lista na tela
-            listTarefas.ItemsSource = tarefasDoAluno;
-            lblQuantidade.Text = $"{tarefasDoAluno.Count} tarefas pendentes";
+            await DisplayAlert("Erro", "Professor n√£o encontrado.", "OK");
+            return;
         }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Erro", "N„o foi possÌvel carregar as tarefas.", "OK");
-        }
+
+        var tarefas = await _db.ListarTarefasAsync();
+
+        var tarefasDoProfessor = tarefas.ToList();
+
+        listaTarefas.ItemsSource = tarefasDoProfessor;
+
+        lblSemTarefas.IsVisible = tarefasDoProfessor.Count == 0;
+        listaTarefas.IsVisible = tarefasDoProfessor.Count > 0;
+    }
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+    private async void OnExcluirClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var tarefa = (Tarefa)button.CommandParameter;
+
+        bool confirmar = await DisplayAlert("Excluir", "Deseja excluir essa tarefa?", "Sim", "N√£o");
+
+        if (!confirmar) return;
+
+        await _db.DeletarTarefaAsync(tarefa.IdTarefa);
+
+        OnAppearing(); // recarrega lista
+    }
+    private async void OnEditarClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var tarefa = (Tarefa)button.CommandParameter;
+
+        await Navigation.PushAsync(new EditarTarefaPage(tarefa));
+    }
+    private async void OnConcluirClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var tarefa = (Tarefa)button.CommandParameter;
+
+        tarefa.Status = "Conclu√≠da";
+
+        await _db.UpdateAsync(tarefa);
+
+        await DisplayAlert("Sucesso", "Tarefa conclu√≠da!", "OK");
+
+        OnAppearing(); // recarrega a lista
     }
 }
