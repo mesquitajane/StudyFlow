@@ -1,4 +1,4 @@
-﻿using SQLite;
+using SQLite;
 using StudyFlow.Data.Models;
 
 namespace StudyFlow.Data;
@@ -12,7 +12,7 @@ public class StudyFlowDatabaseService
         if (_database != null)
             return;
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow.db3");
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow2.db3");
         _database = new SQLiteAsyncConnection(dbPath);
 
         await _database.CreateTableAsync<Usuario>();
@@ -67,18 +67,29 @@ public class StudyFlowDatabaseService
         return await _database!.Table<Usuario>().ToListAsync();
     }
 
-    public async Task<List<Tarefa>> ListarTarefasAsync()
-    {
-        await InitAsync();
-        return await _database!.Table<Tarefa>().ToListAsync();
-    }
-
     public async Task<List<Professor>> ListarProfessoresAsync()
     {
         await InitAsync();
         return await _database!.Table<Professor>().ToListAsync();
     }
-
+    public async Task<List<Tarefa>> ListarTarefasAsync()
+    {
+        await InitAsync();
+        return await _database!.Table<Tarefa>().ToListAsync();
+    }
+    public async Task DeletarTarefaAsync(int id)
+    {
+        await InitAsync();
+        var tarefa = await _database.Table<Tarefa>()
+                                    .FirstOrDefaultAsync(t => t.IdTarefa == id);
+        if (tarefa != null)
+            await _database.DeleteAsync(tarefa);
+    }
+    public async Task UpdateAsync(Tarefa tarefa)
+    {
+        await InitAsync();
+        await _database.UpdateAsync(tarefa);
+    }
     public async Task<List<Aluno>> ListarAlunosAsync()
     {
         await InitAsync();
