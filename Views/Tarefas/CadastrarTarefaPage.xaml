@@ -1,73 +1,36 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.Dashboards.CadastrarTarefaPage"
+             x:Class="StudyFlow.Views.CadastrarTarefaPage"
              BackgroundColor="#E8F5E9">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
-                <Image Source="ok.png" 
-                       HeightRequest="80" 
-                       HorizontalOptions="Center" />
+        <Label Text="Cadastrar Tarefa"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="#2E7D32"
+               HorizontalOptions="Center"/>
 
-                <Label Text="Cadastrar Tarefa"
-                       FontSize="28"
-                       TextColor="#2E7D32"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"/>
+        <Entry x:Name="entryTitulo"
+               Placeholder="Título da tarefa"/>
 
-                <Label Text="Preencha os detalhes da atividade abaixo"
-                       FontSize="14"
-                       TextColor="#666"
-                       HorizontalOptions="Center"/>
-            </VerticalStackLayout>
+        <Entry x:Name="entryDescricao"
+               Placeholder="Descrição"/>
 
-            <BoxView HeightRequest="1" Color="#2E7D32" Opacity="0.2" Margin="0,10" />
+        <DatePicker x:Name="dateEntrega"/>
+        <Entry x:Name="entryTurma"
+       Placeholder="Turma (ex: 1A, 2B)" />
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Título da Tarefa" TextColor="#2E7D32" FontAttributes="Bold" />
-                <Entry x:Name="entryTitulo" 
-                       Placeholder="Ex: Exercícios de Álgebra" 
-                       TextColor="#212121" 
-                       PlaceholderColor="#81C784" />
-            </VerticalStackLayout>
+        <Button Text="Salvar"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                Clicked="OnSalvarClicked"/>
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Descrição (Opcional)" TextColor="#2E7D32" FontAttributes="Bold" />
-                <Editor x:Name="entryDescricao" 
-                        Placeholder="Descreva os detalhes, páginas do livro, etc." 
-                        HeightRequest="120"
-                        TextColor="#212121" 
-                        PlaceholderColor="#81C784"
-                        AutoSize="Disabled" />
-            </VerticalStackLayout>
+        <Button Text="Voltar"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                Clicked="OnVoltarClicked"/>
 
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Data de Entrega" TextColor="#2E7D32" FontAttributes="Bold" />
-                <DatePicker x:Name="dateEntrega" 
-                            Format="dd/MM/yyyy"
-                            TextColor="#212121"
-                            MinimumDate="2024-01-01" />
-            </VerticalStackLayout>
+    </VerticalStackLayout>
 
-            <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
-                <Button Text="SALVAR TAREFA" 
-                        Clicked="OnSalvarClicked"
-                        BackgroundColor="#2E7D32"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        HeightRequest="55"
-                        CornerRadius="10"/>
-
-                <Button Text="CANCELAR" 
-                        Clicked="OnVoltarClicked"
-                        BackgroundColor="Transparent"
-                        TextColor="#2E7D32"
-                        FontAttributes="Bold"/>
-            </VerticalStackLayout>
-
-        </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>
