@@ -85,8 +85,8 @@ public class Tarefa
     public string Status { get; set; } = string.Empty;
     public string Turma { get; set; } = string.Empty;
 
-    [Indexed, NotNull]
-    public int IdAluno { get; set; }
+    //[Indexed, NotNull]
+    //public int IdAluno { get; set; }
 
     [Indexed, NotNull]
     public int IdProfessor { get; set; }
@@ -128,4 +128,27 @@ public class RelatorioComportamental
     public string? Observacoes { get; set; }
 
     public DateTime DataRegistro { get; set; } = DateTime.Now;
+}
+
+public class Entrega
+{
+    [PrimaryKey, AutoIncrement]
+    public int IdEntrega { get; set; }
+    public int IdTarefa { get; set; }
+    public int IdAluno { get; set; }
+    public string RespostaTexto { get; set; } = string.Empty;
+    public string? CaminhoArquivo { get; set; } // Local do arquivo no celular
+    public string Status { get; set; } = "Rascunho"; // Rascunho ou Entregue
+    public double? Nota { get; set; } // Nullable até o professor avaliar
+    public DateTime DataEntrega { get; internal set; }
+}
+
+public class TarefaComNota
+{
+    public Tarefa? Tarefa { get; set; }
+    public Entrega? Entrega { get; set; }
+    public string StatusExibicao => Entrega?.Status ?? "Não entregue";
+    public string NotaExibicao => (Entrega != null && Entrega.Nota.HasValue)
+        ? $"Nota: {Entrega.Nota}"
+        : "Aguardando nota";
 }

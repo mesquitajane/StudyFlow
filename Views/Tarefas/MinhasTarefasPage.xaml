@@ -20,6 +20,7 @@
                             <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
                                 <Button Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding .}" BackgroundColor="#E8F5E9" TextColor="#2E7D32" HeightRequest="40"/>
                                 <Button Text="Excluir" Clicked="OnExcluirClicked" CommandParameter="{Binding .}" BackgroundColor="#FFEBEE" TextColor="#C62828" HeightRequest="40"/>
+                                <Button Text="Corrigir" BackgroundColor="#FFF9C4" TextColor="#FBC02D" FontAttributes="Bold" Clicked="OnVerEntregasClicked" CommandParameter="{Binding .}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>

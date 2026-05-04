@@ -14,13 +14,15 @@
 
         <Entry x:Name="entryTitulo"
                Placeholder="Título da tarefa"
-               TextColor="#2E7D32"/>
+               TextColor="#E8F5E9"
+               BackgroundColor="#2E7D32"/>
 
         <Editor x:Name="editorDescricao"
                 Placeholder="Descrição"
                 AutoSize="TextChanges"
                 HeightRequest="100"
-                TextColor="#2E7D32"/>
+                TextColor="#E8F5E9"
+                BackgroundColor="#2E7D32"/>
 
         <DatePicker x:Name="dateEntrega" TextColor="#2E7D32"/>
 

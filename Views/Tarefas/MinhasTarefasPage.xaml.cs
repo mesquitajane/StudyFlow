@@ -50,5 +50,17 @@ public partial class MinhasTarefasPage : ContentPage
         await Navigation.PushAsync(new EditarTarefaPage(tarefa));
     }
 
+    private async void OnVerEntregasClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var tarefaSelecionada = (Tarefa)button.CommandParameter;
+
+        if (tarefaSelecionada != null)
+        {
+            // Navega para a página de correção passando a tarefa escolhida
+            await Navigation.PushAsync(new AvaliarTarefaPage(tarefaSelecionada));
+        }
+    }
+
     private async void Button_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
 }

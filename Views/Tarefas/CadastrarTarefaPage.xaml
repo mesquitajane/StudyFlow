@@ -13,15 +13,17 @@
 
         <Entry x:Name="entryTitulo"
                Placeholder="Título da tarefa" 
-               TextColor="#2E7D32"/>
+               TextColor="#E8F5E9"
+               BackgroundColor="#2E7D32"/>
 
         <Entry x:Name="entryDescricao"
                Placeholder="Descrição"
-               TextColor="#2E7D32"/>
+               TextColor="#E8F5E9"
+               BackgroundColor="#2E7D32"/>
 
         <DatePicker x:Name="dateEntrega" TextColor="#2E7D32"/>
         <Label Text="Enviar para a Turma" TextColor="#2E7D32" FontAttributes="Bold" />
-        <Picker x:Name="pickerTurmaTarefa" Title="Escolha a turma" TextColor="#2E7D32" BackgroundColor="#2E7D32">
+        <Picker x:Name="pickerTurmaTarefa" Title="Escolha a turma" TextColor="#2E7D32" BackgroundColor="#E8F5E9">
             <Picker.Items>
                 <x:String>1º Ano A</x:String>
                 <x:String>2º Ano A</x:String>

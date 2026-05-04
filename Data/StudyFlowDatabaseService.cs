@@ -12,7 +12,7 @@ public class StudyFlowDatabaseService
         if (_database != null)
             return;
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow2.db3");
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow3.db3");
         _database = new SQLiteAsyncConnection(dbPath);
 
         await _database.CreateTableAsync<Usuario>();
@@ -23,6 +23,7 @@ public class StudyFlowDatabaseService
         await _database.CreateTableAsync<Tarefa>();
         await _database.CreateTableAsync<Desempenho>();
         await _database.CreateTableAsync<RelatorioComportamental>();
+        await _database.CreateTableAsync<Entrega>();
     }
 
     public async Task<int> InserirUsuarioAsync(Usuario usuario)
@@ -94,5 +95,35 @@ public class StudyFlowDatabaseService
     {
         await InitAsync();
         return await _database!.Table<Aluno>().ToListAsync();
+    }
+
+    public async Task<List<Entrega>> ListarEntregasAsync()
+    {
+        await InitAsync();
+        return await _database!.Table<Entrega>().ToListAsync();
+    }
+
+    public async Task SalvarEntregaAsync(Entrega entrega)
+    {
+        await InitAsync();
+        // Verifica se já existe uma entrega desse aluno para essa tarefa
+        var existente = await _database!.Table<Entrega>()
+            .FirstOrDefaultAsync(e => e.IdTarefa == entrega.IdTarefa && e.IdAluno == entrega.IdAluno);
+
+        if (existente != null)
+        {
+            entrega.IdEntrega = existente.IdEntrega;
+            await _database.UpdateAsync(entrega);
+        }
+        else
+        {
+            await _database.InsertAsync(entrega);
+        }
+    }
+
+    public async Task AtualizarEntregaAsync(Entrega entrega)
+    {
+        await InitAsync();
+        await _database!.UpdateAsync(entrega);
     }
 }
