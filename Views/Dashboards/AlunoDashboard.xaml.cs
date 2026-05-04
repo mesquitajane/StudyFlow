@@ -26,6 +26,6 @@ public partial class AlunoDashboard : ContentPage
 
     private async void OnVerTarefasClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MinhasTarefasPage(_usuarioLogado));
+        await Navigation.PushAsync(new TarefasAlunoPage(_usuarioLogado));
     }
 }

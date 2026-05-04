@@ -13,14 +13,16 @@
                HorizontalOptions="Center"/>
 
         <Entry x:Name="entryTitulo"
-               Placeholder="Título da tarefa"/>
+               Placeholder="Título da tarefa"
+               TextColor="#2E7D32"/>
 
         <Editor x:Name="editorDescricao"
                 Placeholder="Descrição"
                 AutoSize="TextChanges"
-                HeightRequest="100"/>
+                HeightRequest="100"
+                TextColor="#2E7D32"/>
 
-        <DatePicker x:Name="dateEntrega"/>
+        <DatePicker x:Name="dateEntrega" TextColor="#2E7D32"/>
 
         <Button Text="Salvar"
                 BackgroundColor="#2E7D32"

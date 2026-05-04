@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.RegisterPage"
+             x:Class="StudyFlow.Views.Autenticacao.RegisterPage"
              BackgroundColor="#E8F5E9">
 
     <ScrollView>
@@ -47,9 +47,17 @@
 
             <BoxView HeightRequest="1" Color="#2E7D32" Opacity="0.2" />
 
-            <VerticalStackLayout x:Name="layoutAluno" IsVisible="False">
-                <Entry x:Name="entryTurma" Placeholder="Turma (ex: 9º Ano B)" TextColor="#212121" PlaceholderColor="#81C784" />
-            </VerticalStackLayout>
+                <VerticalStackLayout x:Name="layoutAluno" IsVisible="False">
+                    <Label Text="Sua Turma" TextColor="#2E7D32" FontAttributes="Bold" />
+                    <Picker x:Name="pickerTurma" Title="Selecione sua turma">
+                        <Picker.Items>
+                            <x:String>1º Ano A</x:String>
+                            <x:String>2º Ano A</x:String>
+                            <x:String>3º Ano A</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+ 
 
             <VerticalStackLayout x:Name="layoutProfessor" IsVisible="False">
                 <Entry x:Name="entryDisciplina" Placeholder="Disciplina (ex: História)" TextColor="#212121" PlaceholderColor="#81C784" />

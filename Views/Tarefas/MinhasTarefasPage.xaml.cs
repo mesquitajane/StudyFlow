@@ -1,7 +1,7 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
 
-namespace StudyFlow.Views;
+namespace StudyFlow.Views.Tarefas;
 
 public partial class MinhasTarefasPage : ContentPage
 {
@@ -18,61 +18,37 @@ public partial class MinhasTarefasPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await _db.InitAsync();
 
         var professores = await _db.ListarProfessoresAsync();
+        var professorLogado = professores.FirstOrDefault(p => p.IdUsuario == _usuario.IdUsuario);
 
-        var professor = professores.FirstOrDefault(p => p.IdUsuario == _usuario.IdUsuario);
-
-        if (professor == null)
+        if (professorLogado != null)
         {
-            await DisplayAlert("Erro", "Professor não encontrado.", "OK");
-            return;
+            var todas = await _db.ListarTarefasAsync();
+            // FILTRO: Onde o IdProfessor da tarefa é o ID do professor logado
+            var minhasTarefas = todas.Where(t => t.IdProfessor == professorLogado.IdProfessor).ToList();
+
+            listaTarefas.ItemsSource = minhasTarefas;
+            lblSemTarefas.IsVisible = !minhasTarefas.Any();
         }
-
-        var tarefas = await _db.ListarTarefasAsync();
-
-        var tarefasDoProfessor = tarefas.ToList();
-
-        listaTarefas.ItemsSource = tarefasDoProfessor;
-
-        lblSemTarefas.IsVisible = tarefasDoProfessor.Count == 0;
-        listaTarefas.IsVisible = tarefasDoProfessor.Count > 0;
     }
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
-    }
+
     private async void OnExcluirClicked(object sender, EventArgs e)
     {
-        var button = (Button)sender;
-        var tarefa = (Tarefa)button.CommandParameter;
-
-        bool confirmar = await DisplayAlert("Excluir", "Deseja excluir essa tarefa?", "Sim", "Não");
-
-        if (!confirmar) return;
-
-        await _db.DeletarTarefaAsync(tarefa.IdTarefa);
-
-        OnAppearing(); // recarrega lista
+        var tarefa = (Tarefa)((Button)sender).CommandParameter;
+        if (await DisplayAlert("Excluir", "Deseja apagar esta tarefa?", "Sim", "Não"))
+        {
+            await _db.DeletarTarefaAsync(tarefa.IdTarefa);
+            OnAppearing();
+        }
     }
+
     private async void OnEditarClicked(object sender, EventArgs e)
     {
-        var button = (Button)sender;
-        var tarefa = (Tarefa)button.CommandParameter;
-
+        var tarefa = (Tarefa)((Button)sender).CommandParameter;
         await Navigation.PushAsync(new EditarTarefaPage(tarefa));
     }
-    private async void OnConcluirClicked(object sender, EventArgs e)
-    {
-        var button = (Button)sender;
-        var tarefa = (Tarefa)button.CommandParameter;
 
-        tarefa.Status = "Concluída";
-
-        await _db.UpdateAsync(tarefa);
-
-        await DisplayAlert("Sucesso", "Tarefa concluída!", "OK");
-
-        OnAppearing(); // recarrega a lista
-    }
+    private async void Button_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
 }

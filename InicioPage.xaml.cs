@@ -1,4 +1,4 @@
-using StudyFlow.Views;
+using StudyFlow.Views.Autenticacao;
 
 namespace StudyFlow;
 

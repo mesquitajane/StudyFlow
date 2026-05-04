@@ -1,7 +1,8 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
+using StudyFlow.Views.Tarefas;
 
-namespace StudyFlow.Views;
+namespace StudyFlow.Views.Tarefas;
 
 public partial class CadastrarTarefaPage : ContentPage
 {
@@ -33,6 +34,11 @@ public partial class CadastrarTarefaPage : ContentPage
             await DisplayAlert("Erro", "Professor não encontrado!", "OK");
             return;
         }
+        else if (pickerTurmaTarefa.SelectedIndex == -1)
+        {
+             await DisplayAlert("Erro", "Selecione uma turma!", "OK");
+             return;
+        }
 
         var tarefa = new Tarefa
         {
@@ -40,9 +46,11 @@ public partial class CadastrarTarefaPage : ContentPage
             Descricao = entryDescricao.Text,
             DataEntrega = dateEntrega.Date,
             Status = "Pendente",
-            Turma = entryTurma.Text
+            Turma = pickerTurmaTarefa.SelectedItem.ToString(),
+            IdProfessor = professor.IdProfessor
         };
 
+  
         await _db.InserirTarefaAsync(tarefa);
 
         await DisplayAlert("Sucesso", "Tarefa cadastrada!", "OK");

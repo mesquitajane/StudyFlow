@@ -1,7 +1,7 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
 
-namespace StudyFlow.Views;
+namespace StudyFlow.Views.Tarefas;
 
 public partial class TarefasAlunoPage : ContentPage
 {
@@ -18,28 +18,21 @@ public partial class TarefasAlunoPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await _db.InitAsync();
 
-        var tarefas = await _db.ListarTarefasAsync();
-
-        // BUSCA O ALUNO LOGADO
         var alunos = await _db.ListarAlunosAsync();
+        var alunoLogado = alunos.FirstOrDefault(a => a.IdUsuario == _usuario.IdUsuario);
 
-        var aluno = alunos.FirstOrDefault(a => a.IdUsuario == _usuario.IdUsuario);
-
-        if (aluno == null)
+        if (alunoLogado != null)
         {
-            listaTarefas.ItemsSource = new List<Tarefa>();
-            return;
+            lblTurma.Text = $"Turma: {alunoLogado.Turma}";
+            var todas = await _db.ListarTarefasAsync();
+            // FILTRO: Onde a Turma da tarefa é igual a Turma do aluno
+            var tarefasDaTurma = todas.Where(t => t.Turma == alunoLogado.Turma).ToList();
+
+            listaTarefas.ItemsSource = tarefasDaTurma;
         }
-
-        // FILTRA PELA TURMA
-        listaTarefas.ItemsSource = tarefas
-            .Where(t => t.Turma == aluno.Turma)
-            .ToList();
     }
 
-    private async void OnVoltarClicked(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
-    }
+    private async void OnVoltarClicked(object sender, EventArgs e) => await Navigation.PopAsync();
 }

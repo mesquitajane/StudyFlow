@@ -1,87 +1,32 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.MinhasTarefasPage"
+             x:Class="StudyFlow.Views.Tarefas.MinhasTarefasPage"
              BackgroundColor="#E8F5E9">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+        <Label Grid.Row="0" Text="Minhas Criações" FontSize="26" FontAttributes="Bold" TextColor="#2E7D32" HorizontalOptions="Center" Margin="0,0,0,10"/>
 
-        <Label Text="Minhas Tarefas"
-               FontSize="26"
-               FontAttributes="Bold"
-               TextColor="#2E7D32"
-               HorizontalOptions="Center"/>
-        <Label x:Name="lblSemTarefas"
-       Text="Nenhuma tarefa cadastrada."
-       IsVisible="False"
-       TextColor="Gray"
-       FontSize="16"
-       HorizontalOptions="Center"/>
+        <Label x:Name="lblSemTarefas" Grid.Row="1" Text="Você ainda não criou tarefas." IsVisible="False" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
 
-        <CollectionView x:Name="listaTarefas">
+        <CollectionView x:Name="listaTarefas" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="12"
-       Margin="5"
-       BackgroundColor="White"
-       CornerRadius="12"
-       HasShadow="True">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Titulo}"
-       FontAttributes="Bold"
-       FontSize="20"
-       TextColor="#1B5E20"/>
+                    <Frame Padding="12" Margin="0,5" BackgroundColor="White" CornerRadius="12" HasShadow="True">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Titulo}" FontAttributes="Bold" FontSize="18" TextColor="#1B5E20"/>
+                            <Label Text="{Binding Turma, StringFormat='Turma: {0}'}" FontSize="13" TextColor="#2E7D32" FontAttributes="Bold"/>
+                            <Label Text="{Binding Descricao}" FontSize="14" TextColor="#424242"/>
 
-                            <Label Text="{Binding Descricao}"
-       FontSize="14"
-       TextColor="#424242"/>
-
-                            <Label Text="{Binding DataEntrega, StringFormat='{0:dd/MM/yyyy}'}"
-       FontSize="12"
-       TextColor="#9E9E9E"/>
-
-                            <Label Text="{Binding Status}"
-       FontSize="13"
-       FontAttributes="Bold"
-       TextColor="#2E7D32"/>
                             <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
-                                    <Button Text="Editar"
-            BackgroundColor="#E8F5E9"
-            TextColor="#2E7D32"
-            CornerRadius="8"
-            FontAttributes="Bold"
-            Clicked="OnEditarClicked"
-            CommandParameter="{Binding .}"
-            HorizontalOptions="FillAndExpand"/>
-                                <Button Text="Concluir"
-        BackgroundColor="#E3F2FD"
-        TextColor="#1565C0"
-        CornerRadius="8"
-        FontAttributes="Bold"
-        Clicked="OnConcluirClicked"
-        CommandParameter="{Binding .}"
-        HorizontalOptions="FillAndExpand"/>
-
-                                    <Button Text="Excluir"
-            BackgroundColor="#FFEBEE"
-            TextColor="#C62828"
-            CornerRadius="8"
-            FontAttributes="Bold"
-            Clicked="OnExcluirClicked"
-            CommandParameter="{Binding .}"
-            HorizontalOptions="FillAndExpand"/>
-
-                                </HorizontalStackLayout>
+                                <Button Text="Editar" Clicked="OnEditarClicked" CommandParameter="{Binding .}" BackgroundColor="#E8F5E9" TextColor="#2E7D32" HeightRequest="40"/>
+                                <Button Text="Excluir" Clicked="OnExcluirClicked" CommandParameter="{Binding .}" BackgroundColor="#FFEBEE" TextColor="#C62828" HeightRequest="40"/>
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Voltar"
-        BackgroundColor="#2E7D32"
-        TextColor="White"
-        Clicked="Button_Clicked"/>
-
-    </VerticalStackLayout>
+        <Button Grid.Row="2" Text="Voltar" Clicked="Button_Clicked" BackgroundColor="#2E7D32" TextColor="White" Margin="0,10,0,0"/>
+    </Grid>
 </ContentPage>

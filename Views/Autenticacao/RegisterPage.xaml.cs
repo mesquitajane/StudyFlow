@@ -1,7 +1,7 @@
 using StudyFlow.Data.Models;
 using StudyFlow.Data; 
 
-namespace StudyFlow.Views;
+namespace StudyFlow.Views.Autenticacao;
 
 public partial class RegisterPage : ContentPage
 {
@@ -62,8 +62,8 @@ public partial class RegisterPage : ContentPage
             switch (tipo)
             {
                 case "Aluno":
-                    if (string.IsNullOrWhiteSpace(entryTurma.Text)) throw new Exception("Informe a turma do aluno.");
-                    var aluno = new Aluno { IdUsuario = novoUsuario.IdUsuario, Turma = entryTurma.Text };
+                    if (pickerTurma.SelectedIndex == -1) throw new Exception("Informe a turma do aluno.");
+                    var aluno = new Aluno { IdUsuario = novoUsuario.IdUsuario, Turma = pickerTurma.SelectedItem?.ToString() ?? "" };
                     await _db.InserirAlunoAsync(aluno);
                     sucessoPerfil = true;
                     break;

@@ -1,56 +1,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.TarefasAlunoPage"
-             BackgroundColor="#E8F5E9">
+             x:Class="StudyFlow.Views.Tarefas.TarefasAlunoPage"
+             BackgroundColor="#E8F5E9"
+             Title="Minhas Atividades">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,10">
+            <Label Text="Tarefas da Turma" FontSize="26" FontAttributes="Bold" TextColor="#2E7D32" HorizontalOptions="Center"/>
+            <Label x:Name="lblTurma" FontSize="14" TextColor="#666" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
 
-        <Label Text="Minhas Tarefas"
-               FontSize="26"
-               FontAttributes="Bold"
-               TextColor="#2E7D32"
-               HorizontalOptions="Center"/>
-
-        <CollectionView x:Name="listaTarefas">
-
+        <CollectionView x:Name="listaTarefas" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10"
-                           Margin="5"
-                           BackgroundColor="White"
-                           CornerRadius="10">
-
-                        <VerticalStackLayout>
-
-                            <Label Text="{Binding Titulo}"
-                                   FontSize="18"
-                                   FontAttributes="Bold"/>
-
-                            <Label Text="{Binding Descricao}"
-                                   FontSize="14"/>
-
-                            <Label Text="{Binding DataEntrega, StringFormat='{0:dd/MM/yyyy}'}"
-                                   FontSize="12"
-                                   TextColor="Gray"/>
-
-                            <Label Text="{Binding Status}"
-                                   FontSize="13"
-                                   FontAttributes="Bold"
-                                   TextColor="#2E7D32"/>
-
+                    <Frame Padding="15" Margin="0,5" CornerRadius="10" HasShadow="True">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Titulo}" FontSize="18" FontAttributes="Bold" TextColor="#1B5E20"/>
+                            <Label Text="{Binding Descricao}" FontSize="14" TextColor="#555"/>
+                            <Label Text="{Binding DataEntrega, StringFormat='Entrega: {0:dd/MM/yyyy}'}" FontSize="12" TextColor="Red" FontAttributes="Bold"/>
+                            <Label Text="{Binding Status}" FontSize="13" TextColor="#2E7D32" HorizontalOptions="End"/>
                         </VerticalStackLayout>
-
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
 
-        <Button Text="Voltar"
-                BackgroundColor="#2E7D32"
-                TextColor="White"
-                Clicked="OnVoltarClicked"/>
-
-    </VerticalStackLayout>
-
+        <Button Grid.Row="2" Text="Sair" Clicked="OnVoltarClicked" BackgroundColor="#2E7D32" TextColor="White" Margin="0,10,0,0"/>
+    </Grid>
 </ContentPage>

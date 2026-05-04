@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StudyFlow.Views.CadastrarTarefaPage"
+             x:Class="StudyFlow.Views.Tarefas.CadastrarTarefaPage"
              BackgroundColor="#E8F5E9">
 
     <VerticalStackLayout Padding="20" Spacing="15">
@@ -12,15 +12,23 @@
                HorizontalOptions="Center"/>
 
         <Entry x:Name="entryTitulo"
-               Placeholder="Título da tarefa"/>
+               Placeholder="Título da tarefa" 
+               TextColor="#2E7D32"/>
 
         <Entry x:Name="entryDescricao"
-               Placeholder="Descrição"/>
+               Placeholder="Descrição"
+               TextColor="#2E7D32"/>
 
-        <DatePicker x:Name="dateEntrega"/>
-        <Entry x:Name="entryTurma"
-       Placeholder="Turma (ex: 1A, 2B)" />
-
+        <DatePicker x:Name="dateEntrega" TextColor="#2E7D32"/>
+        <Label Text="Enviar para a Turma" TextColor="#2E7D32" FontAttributes="Bold" />
+        <Picker x:Name="pickerTurmaTarefa" Title="Escolha a turma" TextColor="#2E7D32" BackgroundColor="#2E7D32">
+            <Picker.Items>
+                <x:String>1º Ano A</x:String>
+                <x:String>2º Ano A</x:String>
+                <x:String>3º Ano A</x:String>
+            </Picker.Items>
+        </Picker>
+        
         <Button Text="Salvar"
                 BackgroundColor="#2E7D32"
                 TextColor="White"
