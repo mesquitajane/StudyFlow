@@ -48,7 +48,14 @@
             <BoxView HeightRequest="1" Color="#2E7D32" Opacity="0.2" />
 
                 <VerticalStackLayout x:Name="layoutAluno" IsVisible="False">
-                    <Label Text="Sua Turma" TextColor="#2E7D32" FontAttributes="Bold" />
+                <Entry x:Name="entryCpfAluno" 
+                   Placeholder="Seu CPF (apenas números)" 
+                   Keyboard="Numeric" 
+                   MaxLength="11"
+                   TextColor="#212121" 
+                   PlaceholderColor="#81C784" />    
+
+                <Label Text="Sua Turma" TextColor="#2E7D32" FontAttributes="Bold" />
                     <Picker x:Name="pickerTurma" Title="Selecione sua turma">
                         <Picker.Items>
                             <x:String>1º Ano A</x:String>

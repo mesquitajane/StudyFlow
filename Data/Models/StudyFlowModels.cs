@@ -29,6 +29,11 @@ public class Aluno
     [Indexed, NotNull]
     public int IdUsuario { get; set; }
 
+    [Indexed, NotNull] 
+    public string CPF { get; set; } = string.Empty;
+
+    public int? IdResponsavel { get; set; }
+
     [NotNull]
     public string Turma { get; set; } = string.Empty;
 
@@ -151,4 +156,11 @@ public class TarefaComNota
     public string NotaExibicao => (Entrega != null && Entrega.Nota.HasValue)
         ? $"Nota: {Entrega.Nota}"
         : "Aguardando nota";
+}
+
+public class RelatorioComportamentalView
+{
+    public RelatorioComportamental Relatorio { get; set; }
+    public string NomeProfessor { get; set; }
+    public string DataFormatada => Relatorio.DataRegistro.ToString("dd/MM/yyyy HH:mm");
 }

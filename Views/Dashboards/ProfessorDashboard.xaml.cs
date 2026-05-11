@@ -1,6 +1,7 @@
 using StudyFlow.Data;
 using StudyFlow.Data.Models;
 using StudyFlow.Views.Tarefas;
+using StudyFlow.Views.Relatorios;
 
 namespace StudyFlow.Views.Dashboards;
 
@@ -44,5 +45,10 @@ public partial class ProfessorDashboard : ContentPage
     private async void OnVerTarefasClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new MinhasTarefasPage(_usuario));
+    }
+
+    private async void OnRelatorioClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CriarRelatorioPage(_usuario));
     }
 }

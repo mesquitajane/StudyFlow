@@ -64,6 +64,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Relatorios\CriarRelatorioPage.xaml.cs">
+	    <DependentUpon>CriarRelatorioPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Relatorios\CriarRelatorioPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Relatorios\ListaRelatoriosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SecretariaPages\GerenciarUsuarioPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

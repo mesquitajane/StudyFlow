@@ -62,8 +62,21 @@ public partial class RegisterPage : ContentPage
             switch (tipo)
             {
                 case "Aluno":
-                    if (pickerTurma.SelectedIndex == -1) throw new Exception("Informe a turma do aluno.");
-                    var aluno = new Aluno { IdUsuario = novoUsuario.IdUsuario, Turma = pickerTurma.SelectedItem?.ToString() ?? "" };
+                    // Validação do CPF e Turma
+                    if (string.IsNullOrWhiteSpace(entryCpfAluno.Text) || entryCpfAluno.Text.Length < 11)
+                        throw new Exception("Por favor, insira um CPF válido com 11 dígitos.");
+
+                    if (pickerTurma.SelectedIndex == -1)
+                        throw new Exception("Informe a turma do aluno.");
+
+                    var aluno = new Aluno
+                    {
+                        IdUsuario = novoUsuario.IdUsuario,
+                        CPF = entryCpfAluno.Text.Trim(), // SALVANDO O CPF AQUI
+                        Turma = pickerTurma.SelectedItem.ToString(),
+                        MatriculaAtiva = true
+                    };
+
                     await _db.InserirAlunoAsync(aluno);
                     sucessoPerfil = true;
                     break;

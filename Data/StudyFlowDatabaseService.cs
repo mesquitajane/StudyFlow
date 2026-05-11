@@ -12,7 +12,7 @@ public class StudyFlowDatabaseService
         if (_database != null)
             return;
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow3.db3");
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow4.db3");
         _database = new SQLiteAsyncConnection(dbPath);
 
         await _database.CreateTableAsync<Usuario>();
@@ -142,5 +142,64 @@ public class StudyFlowDatabaseService
     {
         await InitAsync();
         await _database!.UpdateAsync(usuario);
+    }
+
+    public async Task<int> SalvarRelatorioAsync(RelatorioComportamental relatorio)
+    {
+        await InitAsync();
+        return await _database!.InsertAsync(relatorio);
+    }
+
+    public async Task<List<RelatorioComportamental>> ListarRelatoriosPorAlunoAsync(int idAluno)
+    {
+        await InitAsync();
+        return await _database!.Table<RelatorioComportamental>()
+                               .Where(r => r.IdAluno == idAluno)
+                               .OrderByDescending(r => r.DataRegistro)
+                               .ToListAsync();
+    }
+
+    public async Task<List<RelatorioComportamentalView>> ListarRelatoriosDetalhesAsync(int idAluno)
+    {
+        await InitAsync();
+
+        // Busca os relatórios do aluno
+        var relatorios = await _database.Table<RelatorioComportamental>()
+                                        .Where(r => r.IdAluno == idAluno)
+                                        .ToListAsync();
+
+        var professores = await ListarProfessoresAsync();
+        var usuarios = await ListarUsuariosAsync();
+
+        // Faz um "Join" em memória para pegar o nome do professor
+        return relatorios.Select(r => {
+            var prof = professores.FirstOrDefault(p => p.IdProfessor == r.IdProfessor);
+            var userProf = usuarios.FirstOrDefault(u => u.IdUsuario == prof?.IdUsuario);
+
+            return new RelatorioComportamentalView
+            {
+                Relatorio = r,
+                NomeProfessor = userProf?.Nome ?? "Professor Removido"
+            };
+        }).OrderByDescending(x => x.Relatorio.DataRegistro).ToList();
+    }
+
+    public async Task<Aluno> BuscarAlunoPorCpfAsync(string cpf)
+    {
+        await InitAsync();
+        return await _database.Table<Aluno>()
+                              .FirstOrDefaultAsync(a => a.CPF == cpf);
+    }
+
+    public async Task<List<Responsavel>> ListarResponsaveisAsync()
+    {
+        await InitAsync();
+        return await _database.Table<Responsavel>().ToListAsync();
+    }
+
+    public async Task<int> UpdateAsync<T>(T entity) where T : new()
+    {
+        await InitAsync();
+        return await _database.UpdateAsync(entity);
     }
 }
