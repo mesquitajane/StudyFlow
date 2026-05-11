@@ -126,4 +126,21 @@ public class StudyFlowDatabaseService
         await InitAsync();
         await _database!.UpdateAsync(entrega);
     }
+
+    public async Task DeletarUsuarioAsync(int id)
+    {
+        await InitAsync();
+
+        var usuario = await _database!.Table<Usuario>()
+                                      .FirstOrDefaultAsync(u => u.IdUsuario == id);
+
+        if (usuario != null)
+            await _database.DeleteAsync(usuario);
+    }
+
+    public async Task AtualizarUsuarioAsync(Usuario usuario)
+    {
+        await InitAsync();
+        await _database!.UpdateAsync(usuario);
+    }
 }
