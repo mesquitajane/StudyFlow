@@ -67,7 +67,20 @@
  
 
             <VerticalStackLayout x:Name="layoutProfessor" IsVisible="False">
-                <Entry x:Name="entryDisciplina" Placeholder="Disciplina (ex: História)" TextColor="#212121" PlaceholderColor="#81C784" />
+                <Picker x:Name="pickerDisciplina" Title="Informe sua disciplina">
+                    <Picker.Items>
+                        <x:String>Língua Portuguesa</x:String>
+                        <x:String>Matemática</x:String>
+                        <x:String>História</x:String>
+                        <x:String>Geografia</x:String>
+                        <x:String>Língua Inglesa</x:String>
+                        <x:String>Artes</x:String>
+                        <x:String>Educação Física</x:String>
+                        <x:String>Física</x:String>
+                        <x:String>Biologia</x:String>
+                        <x:String>Química</x:String>
+                    </Picker.Items>
+                </Picker>
             </VerticalStackLayout>
 
             <VerticalStackLayout x:Name="layoutResponsavel" IsVisible="False">

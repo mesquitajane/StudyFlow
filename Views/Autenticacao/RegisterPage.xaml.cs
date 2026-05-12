@@ -82,8 +82,8 @@ public partial class RegisterPage : ContentPage
                     break;
 
                 case "Professor":
-                    if (string.IsNullOrWhiteSpace(entryDisciplina.Text)) throw new Exception("Informe a disciplina do professor.");
-                    var prof = new Professor { IdUsuario = novoUsuario.IdUsuario, Disciplina = entryDisciplina.Text };
+                    if (pickerDisciplina.SelectedIndex == -1) throw new Exception("Informe a disciplina do professor.");
+                    var prof = new Professor { IdUsuario = novoUsuario.IdUsuario, Disciplina = pickerDisciplina.SelectedItem.ToString() };
                     await _db.InserirProfessorAsync(prof);
                     sucessoPerfil = true;
                     break;

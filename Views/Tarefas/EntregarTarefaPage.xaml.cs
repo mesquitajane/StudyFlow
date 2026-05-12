@@ -73,4 +73,9 @@ public partial class EntregarTarefaPage : ContentPage
         await DisplayAlert("Sucesso", status == "Rascunho" ? "Rascunho salvo!" : "Tarefa enviada!", "OK");
         await Navigation.PopAsync();
     }
+
+    private async void OnVoltarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

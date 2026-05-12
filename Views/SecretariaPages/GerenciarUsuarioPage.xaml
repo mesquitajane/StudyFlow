@@ -2,78 +2,109 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudyFlow.Views.SecretariaPages.GerenciarUsuarioPage"
-             Title="Gerenciar Usuário">
+             BackgroundColor="#E8F5E9">
 
     <ScrollView x:Name="scrollPagina">
-        <VerticalStackLayout Padding="20" Spacing="12">
+        <VerticalStackLayout Padding="25" Spacing="15">
 
             <Label Text="Gerenciar Usuários"
                    FontSize="26"
                    FontAttributes="Bold"
+                   TextColor="#2E7D32"
                    HorizontalOptions="Center"/>
 
-            <Entry x:Name="entryNome"
-                   Placeholder="Nome"/>
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True" BorderColor="#C8E6C9">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Novo Cadastro" FontAttributes="Bold" TextColor="#2E7D32" />
 
-            <Entry x:Name="entryEmail"
-                   Placeholder="Email"
-                   Keyboard="Email"/>
+                    <Entry x:Name="entryNome"
+                           Placeholder="Nome completo"
+                           TextColor="Black" PlaceholderColor="Gray"/>
 
-            <Entry x:Name="entrySenha"
-                   Placeholder="Senha"
-                   IsPassword="True"/>
+                    <Entry x:Name="entryEmail"
+                           Placeholder="Email institucional"
+                           Keyboard="Email"
+                           TextColor="Black" PlaceholderColor="Gray"/>
 
-            <Picker x:Name="pickerTipoUsuario"
-                    Title="Selecione o tipo de usuário">
-                <Picker.Items>
-                    <x:String>Aluno</x:String>
-                    <x:String>Professor</x:String>
-                    <x:String>Responsavel</x:String>
-                    <x:String>Secretaria</x:String>
-                </Picker.Items>
-            </Picker>
+                    <Entry x:Name="entrySenha"
+                           Placeholder="Senha"
+                           IsPassword="True"
+                           TextColor="Black" PlaceholderColor="Gray"/>
 
-            <Button Text="Cadastrar Usuário" Clicked="OnCadastrarUsuarioClicked"
-                    BackgroundColor="#2E7D32"
-                    TextColor="White"/>
+                    <Picker x:Name="pickerTipoUsuario"
+                            Title="Selecione o tipo de usuário"
+                            TextColor="Black" TitleColor="Gray">
+                        <Picker.Items>
+                            <x:String>Aluno</x:String>
+                            <x:String>Professor</x:String>
+                            <x:String>Responsavel</x:String>
+                            <x:String>Secretaria</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Button Text="Cadastrar Usuário" 
+                            Clicked="OnCadastrarUsuarioClicked"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Margin="0,5,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <BoxView HeightRequest="1" Color="#C8E6C9" Margin="0,10"/>
 
             <Label Text="Usuários Cadastrados"
                    FontSize="20"
                    FontAttributes="Bold"
-                   Margin="0,20,0,0"/>
+                   TextColor="#2E7D32"/>
 
             <SearchBar x:Name="searchUsuarios"
                        Placeholder="Pesquisar por nome ou email"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       BackgroundColor="White"
                        TextChanged="OnPesquisarUsuarioTextChanged"/>
 
-                <CollectionView x:Name="listaUsuarios">
+            <CollectionView x:Name="listaUsuarios" MinimumHeightRequest="300">
                 <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Padding="10" Margin="0,5">
-                                <VerticalStackLayout Spacing="5">
-                                    <Label Text="{Binding Nome}" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Email}"/>
-                                    <Label Text="{Binding TipoUsuario}"/>
+                    <DataTemplate>
+                        <Frame Padding="15" Margin="0,5" BackgroundColor="White" CornerRadius="10" HasShadow="False" BorderColor="#E0E0E0">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Nome}" FontAttributes="Bold" FontSize="16" TextColor="#212121"/>
+                                <Label Text="{Binding Email}" FontSize="14" TextColor="#616161"/>
+                                <Label Text="{Binding TipoUsuario, StringFormat='Tipo: {0}'}" FontSize="12" TextColor="#2E7D32" FontAttributes="Italic"/>
 
-                                <HorizontalStackLayout Spacing="10">
-
-                                    <Button Text="Editar"  BackgroundColor="#1565C0" TextColor="White"
-                                            Clicked="OnEditarUsuarioClicked"
-                                             CommandParameter="{Binding IdUsuario}"/>
-
-                                    <Button Text="Excluir" BackgroundColor="#C62828"
+                                <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+                                    <Button Text="Editar" 
+                                            BackgroundColor="#1565C0" 
                                             TextColor="White"
-                                            Clicked="OnExcluirUsuarioClicked"
+                                            CornerRadius="5"
+                                            HeightRequest="40"
+                                            Clicked="OnEditarUsuarioClicked"
                                             CommandParameter="{Binding IdUsuario}"/>
 
+                                    <Button Text="Excluir" 
+                                            BackgroundColor="#C62828"
+                                            TextColor="White"
+                                            CornerRadius="5"
+                                            HeightRequest="40"
+                                            Clicked="OnExcluirUsuarioClicked"
+                                            CommandParameter="{Binding IdUsuario}"/>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+           
+            <Button Text="Voltar ao Painel" 
+                    Clicked="OnVoltarClicked"
+                    BackgroundColor="#757575"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Margin="0,10,0,0"/>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

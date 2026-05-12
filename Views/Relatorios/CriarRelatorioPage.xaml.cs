@@ -71,4 +71,9 @@ public partial class CriarRelatorioPage : ContentPage
         await DisplayAlert("Sucesso", "Relatório salvo!", "OK");
         await Navigation.PopAsync();
     }
+
+    private async void OnVoltarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

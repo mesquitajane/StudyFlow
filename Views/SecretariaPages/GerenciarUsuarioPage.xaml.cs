@@ -161,4 +161,9 @@ public partial class GerenciarUsuarioPage : ContentPage
 
         listaUsuarios.ItemsSource = usuariosFiltrados;
     }
+
+    private async void OnVoltarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }
