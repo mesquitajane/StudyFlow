@@ -51,4 +51,9 @@ public partial class ProfessorDashboard : ContentPage
     {
         await Navigation.PushAsync(new CriarRelatorioPage(_usuario));
     }
+
+    private async void OnLancarNotasClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new LancamentoNotasPage(_usuario));
+    }
 }

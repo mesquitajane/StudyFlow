@@ -12,7 +12,7 @@
 
         <ScrollView Grid.Row="1">
             <FlexLayout Direction="Column" AlignContent="Center">
-                <Button Text="Minhas Notas" Margin="5" BackgroundColor="#2E7D32" />
+                <Button Text="Minhas Notas" Clicked="OnMinhasNotasClicked" Margin="5" BackgroundColor="#2E7D32" />
                 <Button Text="Ver Tarefas" Clicked="OnVerTarefasClicked" Margin="5" BackgroundColor="#2E7D32" />
                 <Button Text="Relatório Comportamental" Clicked="OnVerRelatoriosClicked" Margin="5" BackgroundColor="#2E7D32" />
                 <Button Text="Sair" Clicked="OnSairClicked" Margin="5" BackgroundColor="#C62828" />

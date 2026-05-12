@@ -42,4 +42,13 @@ public partial class AlunoDashboard : ContentPage
         // 2. Abre a página passando o ID dele mesmo
         await Navigation.PushAsync(new ListaRelatoriosPage(eu.IdAluno)); ;
     }
+
+    private async void OnMinhasNotasClicked(object sender, EventArgs e)
+    {
+        // 1. Pega o objeto Aluno vinculado ao usuário logado
+        var alunos = await _db.ListarAlunosAsync();
+        var eu = alunos.FirstOrDefault(a => a.IdUsuario == _usuarioLogado.IdUsuario);
+        // 2. Abre a página de notas passando o ID do aluno
+        await Navigation.PushAsync(new MinhasNotasPage(eu.IdAluno));
+    }
 }

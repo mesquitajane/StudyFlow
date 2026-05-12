@@ -89,8 +89,18 @@ public partial class ResponsavelDashboard : ContentPage
 
         if (alunoSelecionado != null)
         {
-            // Navega para a página de relatórios passando o ID do aluno
-            await Navigation.PushAsync(new ListaRelatoriosPage(alunoSelecionado.IdAluno));
+            string acao = await DisplayActionSheet($"CPF do Aluno(a): {alunoSelecionado.CPF}", "Cancelar", null,
+                "Ver Comportamento", "Ver Notas");
+
+            if (acao == "Ver Comportamento")
+            {
+                await Navigation.PushAsync(new ListaRelatoriosPage(alunoSelecionado.IdAluno));
+            }
+            else if (acao == "Ver Notas")
+            {
+                // Abre a página de notas passando o ID do filho
+                await Navigation.PushAsync(new MinhasNotasPage(alunoSelecionado.IdAluno));
+            }
         }
     }
 

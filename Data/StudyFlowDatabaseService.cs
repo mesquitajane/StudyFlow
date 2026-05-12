@@ -202,4 +202,18 @@ public class StudyFlowDatabaseService
         await InitAsync();
         return await _database.UpdateAsync(entity);
     }
+
+    public async Task<int> SalvarDesempenhoAsync(Desempenho desempenho)
+    {
+        await InitAsync();
+        return await _database.InsertAsync(desempenho);
+    }
+
+    public async Task<List<Desempenho>> ListarNotasAlunoAsync(int idAluno)
+    {
+        await InitAsync();
+        return await _database.Table<Desempenho>()
+                              .Where(d => d.IdAluno == idAluno)
+                              .ToListAsync();
+    }
 }

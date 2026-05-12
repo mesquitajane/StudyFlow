@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.Relatorios.MinhasNotasPage"
+             BackgroundColor="#E8F5E9">
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="25">
+        <Label Grid.Row="0" Text="Boletim de Notas" FontSize="26" FontAttributes="Bold" 
+               TextColor="#2E7D32" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+        <Frame Grid.Row="1" BackgroundColor="#2E7D32" CornerRadius="15" Padding="15" Margin="0,0,0,20">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="MÉDIA GERAL:" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+                <Label x:Name="lblMediaGeral" Text="0.0" TextColor="White" FontAttributes="Bold" FontSize="18"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <CollectionView Grid.Row="2" x:Name="listaNotas">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="15" Margin="0,5" BackgroundColor="White" CornerRadius="10" BorderColor="#C8E6C9">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="{Binding TipoAvaliacao}" FontAttributes="Bold" FontSize="16" TextColor="#212121"/>
+                                <Label Text="Lançado pelo Professor" FontSize="12" TextColor="#757575"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="{Binding Nota, StringFormat='{0:F1}'}" 
+                                   TextColor="#2E7D32" FontAttributes="Bold" FontSize="22" VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="3" Text="Voltar" Clicked="OnVoltarClicked" 
+                BackgroundColor="#757575" TextColor="White" CornerRadius="10" Margin="0,10,0,0"/>
+    </Grid>
+</ContentPage>
