@@ -24,6 +24,7 @@ public class StudyFlowDatabaseService
         await _database.CreateTableAsync<Desempenho>();
         await _database.CreateTableAsync<RelatorioComportamental>();
         await _database.CreateTableAsync<Entrega>();
+        await _database.CreateTableAsync<Turma>();
     }
 
     public async Task<int> InserirUsuarioAsync(Usuario usuario)
@@ -215,5 +216,17 @@ public class StudyFlowDatabaseService
         return await _database.Table<Desempenho>()
                               .Where(d => d.IdAluno == idAluno)
                               .ToListAsync();
+    }
+
+    public async Task<int> InserirTurmaAsync(Turma turma)
+    {
+        await InitAsync();
+        return await _database!.InsertAsync(turma);
+    }
+
+    public async Task<List<Turma>> ListarTurmasAsync()
+    {
+        await InitAsync();
+        return await _database!.Table<Turma>().ToListAsync();
     }
 }

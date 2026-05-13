@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.CadastrarTurmaPage"
+             BackgroundColor="#E8F5E9">
+
+    <VerticalStackLayout Padding="20" Spacing="12">
+
+        <Label Text="Cadastrar Turma"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="#2E7D32"/>
+
+        <Entry x:Name="entryNome" Placeholder="Nome da turma" />
+
+        <Picker x:Name="pickerPeriodo"
+        Title="Selecione o período">
+            <Picker.Items>
+                <x:String>Manhã</x:String>
+                <x:String>Tarde</x:String>
+                <x:String>Noite</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Button Text="Salvar"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                Clicked="OnSalvarClicked"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

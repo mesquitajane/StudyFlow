@@ -164,3 +164,14 @@ public class RelatorioComportamentalView
     public string NomeProfessor { get; set; }
     public string DataFormatada => Relatorio.DataRegistro.ToString("dd/MM/yyyy HH:mm");
 }
+
+public class Turma
+{
+    [PrimaryKey, AutoIncrement]
+    public int IdTurma { get; set; }
+
+    [NotNull]
+    public string Nome { get; set; } = string.Empty;
+
+    public string? Periodo { get; set; }
+}

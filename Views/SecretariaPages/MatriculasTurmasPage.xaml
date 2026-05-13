@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.MatriculasTurmasPage"
+             BackgroundColor="#E8F5E9">
+
+    <Grid Padding="20" RowDefinitions="Auto,*">
+
+        <!-- Título -->
+        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,20">
+            <Label Text="Matrículas e Turmas"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"/>
+
+            <Label Text="Gerenciamento escolar"
+                   FontSize="14"
+                   TextColor="#666"/>
+        </VerticalStackLayout>
+
+        <!-- Botões -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12">
+
+                <Button Text="Cadastrar Turma"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        Clicked="OnCadastrarTurmaClicked"/>
+
+                <Button Text="Listar Turmas"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        Clicked="OnListarTurmasClicked"/>
+
+                <Button Text="Matricular Aluno"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        Clicked="OnMatricularAlunoClicked"/>
+
+                <Button Text="Listar Matrículas"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        Clicked="OnListarMatriculasClicked"/>
+
+                <Button Text="Voltar"
+                        BackgroundColor="#C62828"
+                        TextColor="White"
+                        Margin="0,20,0,0"
+                        Clicked="OnVoltarClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

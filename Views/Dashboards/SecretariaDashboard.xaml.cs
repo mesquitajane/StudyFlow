@@ -20,4 +20,9 @@ public partial class SecretariaDashboard : ContentPage
     {
         await Navigation.PushAsync(new GerenciarUsuarioPage());
     }
+
+     private async void OnMatriculasTurmasClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MatriculasTurmasPage());
+    }
 }
