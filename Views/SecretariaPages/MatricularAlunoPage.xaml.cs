@@ -9,8 +9,8 @@ public partial class MatricularAlunoPage : ContentPage
     private readonly StudyFlowDatabaseService _db = new();
 
     private List<Aluno> _listaFiltrada = new();
-    private Aluno? _alunoSelecionado;
     private List<Turma> _turmas = new();
+    private dynamic? _alunoSelecionado;
 
     public MatricularAlunoPage()
     {
@@ -18,9 +18,7 @@ public partial class MatricularAlunoPage : ContentPage
         CarregarTurmas();
     }
 
-    // -------------------------
-    // CARREGAR TURMAS
-    // -------------------------
+    
     private async void CarregarTurmas()
     {
         await _db.InitAsync();
@@ -30,9 +28,8 @@ public partial class MatricularAlunoPage : ContentPage
         pickerTurma.ItemsSource = _turmas.Select(t => t.Nome).ToList();
     }
 
-    // -------------------------
-    // BUSCAR ALUNO (CPF OU NOME)
-    // -------------------------
+    
+   
     private async void OnBuscarAluno(object sender, TextChangedEventArgs e)
     {
         string texto = e.NewTextValue?.Trim().ToLower() ?? "";
@@ -40,48 +37,48 @@ public partial class MatricularAlunoPage : ContentPage
         if (string.IsNullOrWhiteSpace(texto))
         {
             listaAlunos.IsVisible = false;
+            listaAlunos.ItemsSource = null;
             return;
         }
 
         var alunos = await _db.ListarAlunosAsync();
         var usuarios = await _db.ListarUsuariosAsync();
 
-        _listaFiltrada = alunos.Where(a =>
-        {
-            var usuario = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
+        var filtrados = alunos
+            .Where(a =>
+                a.CPF.Contains(texto) ||
+                usuarios.Any(u => u.IdUsuario == a.IdUsuario &&
+                                 u.Nome.ToLower().Contains(texto)))
+            .Select(a =>
+            {
+                var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
 
-            return a.CPF.Contains(texto) ||
-                   (usuario?.Nome?.ToLower().Contains(texto) ?? false);
-        }).ToList();
+                return new
+                {
+                    a.IdAluno,
+                    Nome = user?.Nome ?? "Sem nome",
+                    a.CPF,
+                    a.Turma,
+                    Email = user?.Email ?? ""
+                };
+            })
+            .ToList();
 
-        listaAlunos.ItemsSource = _listaFiltrada;
-        listaAlunos.IsVisible = _listaFiltrada.Any();
+        listaAlunos.ItemsSource = filtrados;
+        listaAlunos.IsVisible = filtrados.Any();
     }
-
-    // -------------------------
-    // SELECIONAR ALUNO
-    // -------------------------
     private async void OnAlunoSelecionado(object sender, SelectionChangedEventArgs e)
     {
-        _alunoSelecionado = e.CurrentSelection.FirstOrDefault() as Aluno;
+        _alunoSelecionado = e.CurrentSelection.FirstOrDefault();
 
         if (_alunoSelecionado == null)
             return;
 
-        var usuarios = await _db.ListarUsuariosAsync();
-        var usuario = usuarios.FirstOrDefault(u => u.IdUsuario == _alunoSelecionado.IdUsuario);
-
-        entryCpf.Text = _alunoSelecionado.CPF;
-
-        lblSelecionado.Text = usuario?.Nome ?? "Nome não encontrado";
+        lblSelecionado.Text = $"{_alunoSelecionado.Nome} - {_alunoSelecionado.CPF}";
 
         listaAlunos.IsVisible = false;
-        listaAlunos.SelectedItem = null;
     }
 
-    // -------------------------
-    // MATRICULAR ALUNO
-    // -------------------------
     private async void OnMatricularClicked(object sender, EventArgs e)
     {
         if (_alunoSelecionado == null)
@@ -96,24 +93,33 @@ public partial class MatricularAlunoPage : ContentPage
             return;
         }
 
-        // REGRA: não permitir duplicar matrícula
-        if (!string.IsNullOrEmpty(_alunoSelecionado.Turma))
+        var alunos = await _db.ListarAlunosAsync();
+
+        var aluno = alunos.FirstOrDefault(a =>
+            a.IdAluno == (int)_alunoSelecionado.IdAluno);
+
+        if (aluno == null)
         {
-            await DisplayAlert("Erro", "Este aluno já está matriculado em uma turma", "OK");
+            await DisplayAlert("Erro", "Aluno não encontrado", "OK");
             return;
         }
 
-        _alunoSelecionado.Turma = pickerTurma.SelectedItem.ToString();
+        if (!string.IsNullOrEmpty(aluno.Turma))
+        {
+            await DisplayAlert("Erro", "Aluno já está matriculado em uma turma", "OK");
+            return;
+        }
 
-        await _db.UpdateAsync(_alunoSelecionado);
+        aluno.Turma = pickerTurma.SelectedItem.ToString();
+
+        await _db.UpdateAsync(aluno);
 
         await DisplayAlert("Sucesso", "Aluno matriculado com sucesso!", "OK");
 
-        // limpar tela
+        // limpa tela
         _alunoSelecionado = null;
         lblSelecionado.Text = "Nenhum aluno selecionado";
-        entryCpf.Text = string.Empty;
-        pickerTurma.SelectedIndex = -1;
+        entryCpf.Text = "";
         listaAlunos.IsVisible = false;
     }
 }

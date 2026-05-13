@@ -259,4 +259,9 @@ public class StudyFlowDatabaseService
 
         return turmas.OrderBy(t => t.Nome).ToList();
     }
+
+    public async Task<int> DeletarAlunoAsync(Aluno aluno)
+    {
+        return await _database.DeleteAsync(aluno);
+    }
 }

@@ -25,7 +25,7 @@ public partial class MatriculasTurmasPage : ContentPage
 
     private async void OnListarMatriculasClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("OK", "Listar Matrículas (próximo passo)", "OK");
+        await Navigation.PushAsync(new ListarMatriculas());
     }
 
     private async void OnVoltarClicked(object sender, EventArgs e)

@@ -7,14 +7,14 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="Matrícula de Aluno"
+            <Label Text="Matricular Aluno"
                    FontSize="24"
                    FontAttributes="Bold"
                    TextColor="#2E7D32"/>
 
             <Entry x:Name="entryCpf"
-       Placeholder="Digite CPF ou nome"
-       TextChanged="OnBuscarAluno"/>
+                   Placeholder="Digite CPF ou nome"
+                   TextChanged="OnBuscarAluno"/>
 
             <CollectionView x:Name="listaAlunos"
                 SelectionMode="Single"

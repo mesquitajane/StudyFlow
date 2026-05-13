@@ -1,0 +1,64 @@
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.ListarMatriculas"
+             Title="Listar Matrículas"
+             BackgroundColor="#E8F5E9">
+
+    <VerticalStackLayout Padding="15" Spacing="10">
+
+        <Label Text="Matrículas de Alunos"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="#2E7D32"/>
+
+        
+        <CollectionView x:Name="listaAlunos"
+                        SelectionChanged="OnAlunoSelecionado"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BackgroundColor="White">
+
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nome}" FontAttributes="Bold"/>
+                            <Label Text="{Binding CPF}" FontSize="12"/>
+                            <Label Text="{Binding Turma}" TextColor="Gray"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Frame Padding="15" BackgroundColor="White">
+
+            <VerticalStackLayout Spacing="8">
+
+                <Label x:Name="lblNome" FontAttributes="Bold"/>
+                <Label x:Name="lblCPF"/>
+                <Label x:Name="lblEmail"/>
+                <Label x:Name="lblTurma"/>
+
+                <Picker x:Name="pickerTurmaEditar"
+                        Title="Alterar turma"/>
+
+                <Button Text="Salvar alteração"
+                        BackgroundColor="#2E7D32"
+                        TextColor="White"
+                        Clicked="OnSalvarMatricula"/>
+
+                <Button Text="Excluir aluno"
+                        BackgroundColor="#C62828"
+                        TextColor="White"
+                        Clicked="OnExcluirAluno"/>
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+    </VerticalStackLayout>
+
+</ContentPage>
