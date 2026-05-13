@@ -229,4 +229,34 @@ public class StudyFlowDatabaseService
         await InitAsync();
         return await _database!.Table<Turma>().ToListAsync();
     }
+
+    public async Task<int> AtualizarTurmaAsync(Turma turma)
+    {
+        await InitAsync();
+        return await _database!.UpdateAsync(turma);
+    }
+
+    public async Task<int> DeletarTurmaAsync(Turma turma)
+    {
+        await InitAsync();
+        return await _database!.DeleteAsync(turma);
+    }
+
+    public async Task<List<Turma>> FiltrarTurmasAsync(string? nome, string? nivel, string? periodo)
+    {
+        await InitAsync();
+
+        var turmas = await _database!.Table<Turma>().ToListAsync();
+
+        if (!string.IsNullOrWhiteSpace(nome))
+            turmas = turmas.Where(t => t.Nome.StartsWith(nome)).ToList();
+
+        if (!string.IsNullOrWhiteSpace(nivel))
+            turmas = turmas.Where(t => t.Nivel == nivel).ToList();
+
+        if (!string.IsNullOrWhiteSpace(periodo))
+            turmas = turmas.Where(t => t.Periodo == periodo).ToList();
+
+        return turmas.OrderBy(t => t.Nome).ToList();
+    }
 }

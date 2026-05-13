@@ -22,6 +22,14 @@
             </Picker.Items>
         </Picker>
 
+        <Picker x:Name="pickerNivel"
+        Title="Selecione o nível">
+            <Picker.Items>
+                <x:String>Ensino Fundamental</x:String>
+                <x:String>Ensino Médio</x:String>
+            </Picker.Items>
+        </Picker>
+
         <Button Text="Salvar"
                 BackgroundColor="#2E7D32"
                 TextColor="White"

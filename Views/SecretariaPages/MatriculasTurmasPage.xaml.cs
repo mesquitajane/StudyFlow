@@ -20,7 +20,7 @@ public partial class MatriculasTurmasPage : ContentPage
 
     private async void OnMatricularAlunoClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("OK", "Matricular Aluno (próximo passo)", "OK");
+        await Navigation.PushAsync(new MatricularAlunoPage());
     }
 
     private async void OnListarMatriculasClicked(object sender, EventArgs e)

@@ -174,4 +174,6 @@ public class Turma
     public string Nome { get; set; } = string.Empty;
 
     public string? Periodo { get; set; }
+
+    public string? Nivel { get; set; }
 }

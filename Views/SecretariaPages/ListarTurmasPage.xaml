@@ -4,26 +4,132 @@
              x:Class="StudyFlow.Views.SecretariaPages.ListarTurmasPage"
              BackgroundColor="#E8F5E9">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
 
         <Label Text="Turmas"
                FontSize="22"
                FontAttributes="Bold"
                TextColor="#2E7D32"/>
 
-        <CollectionView x:Name="listaTurmas">
+            <Label Text="Pesquisar Turmas"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"/>
+
+            <SearchBar x:Name="searchNomeFiltro"
+                       Placeholder="Pesquisar por nome da turma"
+                       TextChanged="OnFiltroChanged"/>
+
+            <Picker x:Name="pickerNivelFiltro"
+                    Title="Filtrar por nível"
+                    SelectedIndexChanged="OnFiltroChanged">
+                <Picker.Items>
+                    <x:String>Todos</x:String>
+                    <x:String>Ensino Fundamental</x:String>
+                    <x:String>Ensino Médio</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="pickerPeriodoFiltro"
+                    Title="Filtrar por período"
+                    SelectedIndexChanged="OnFiltroChanged">
+                <Picker.Items>
+                    <x:String></x:String>
+                    <x:String>Manhã</x:String>
+                    <x:String>Tarde</x:String>
+                    <x:String>Noite</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <CollectionView x:Name="listaTurmas">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5" Padding="10">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Nome}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Periodo}"/>
-                        </VerticalStackLayout>
-                    </Frame>
+                    <Frame Padding="15"
+                           Margin="0,5"
+                           BackgroundColor="White"
+                           CornerRadius="10"
+                           HasShadow="False"
+                           BorderColor="#E0E0E0">
+
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Nome}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#212121"/>
+
+                                <Label Text="{Binding Nivel, StringFormat='Nível: {0}'}"
+                                       FontSize="14"
+                                       TextColor="#2E7D32"/>
+
+                                <Label Text="{Binding Periodo, StringFormat='Período: {0}'}"
+                                       FontSize="13"
+                                       TextColor="#616161"/>
+
+                                <Entry x:Name="entryNome"
+                                       Text="{Binding Nome}"
+                                       IsVisible="False"
+                                       Placeholder="Nome da turma"/>
+
+                                <Picker x:Name="pickerNivel"
+                                        SelectedItem="{Binding Nivel}"
+                                        IsVisible="False"
+                                        Title="Nível">
+                                <Picker.Items>
+                                        <x:String>Ensino Fundamental</x:String>
+                                        <x:String>Ensino Médio</x:String>
+                                    </Picker.Items>
+                                </Picker>
+
+                                <Picker x:Name="pickerPeriodo"
+                                        SelectedItem="{Binding Periodo}"
+                                        IsVisible="False"
+                                        Title="Período">
+                                <Picker.Items>
+                                        <x:String>Manhã</x:String>
+                                        <x:String>Tarde</x:String>
+                                        <x:String>Noite</x:String>
+                                    </Picker.Items>
+                                </Picker>
+
+                                <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+
+                                    <Button Text="Editar"
+                                        BackgroundColor="#1565C0"
+                                        TextColor="White"
+                                        CornerRadius="5"
+                                        HeightRequest="40"
+                                        Clicked="OnEditarTurmaClicked"
+                                        CommandParameter="{Binding .}"/>
+
+                                    <Button Text="Excluir"
+                                        BackgroundColor="#C62828"
+                                        TextColor="White"
+                                        CornerRadius="5"
+                                        HeightRequest="40"
+                                        Clicked="OnExcluirTurmaClicked"
+                                        CommandParameter="{Binding .}"/>
+
+                                    <Button Text="Salvar"
+                                            x:Name="btnSalvar"
+                                            IsVisible="False"
+                                            BackgroundColor="#2E7D32"
+                                            TextColor="White"
+                                            CornerRadius="5"
+                                            HeightRequest="40"
+                                            Clicked="OnSalvarTurmaClicked"
+                                            CommandParameter="{Binding .}"/>
+
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
     </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

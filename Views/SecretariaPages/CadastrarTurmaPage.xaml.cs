@@ -16,7 +16,8 @@ public partial class CadastrarTurmaPage : ContentPage
         var turma = new Turma
         {
             Nome = entryNome.Text,
-            Periodo = pickerPeriodo.SelectedItem?.ToString()
+            Periodo = pickerPeriodo.SelectedItem?.ToString(),
+            Nivel = pickerNivel.SelectedItem?.ToString(),
         };
 
         await _db.InitAsync();

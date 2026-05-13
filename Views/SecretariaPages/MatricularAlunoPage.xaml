@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.MatricularAlunoPage"
+             BackgroundColor="#E8F5E9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Matrícula de Aluno"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"/>
+
+            <Entry x:Name="entryCpf"
+       Placeholder="Digite CPF ou nome"
+       TextChanged="OnBuscarAluno"/>
+
+            <CollectionView x:Name="listaAlunos"
+                SelectionMode="Single"
+                SelectionChanged="OnAlunoSelecionado"
+                IsVisible="False">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="0,5">
+                            <VerticalStackLayout>
+
+                                <Label Text="{Binding Nome}" FontAttributes="Bold"/>
+                                <Label Text="{Binding CPF}"/>
+                                <Label Text="{Binding Email}"/>
+
+                                <Label Text="{Binding Turma, StringFormat='Turma atual: {0}'}"
+                           TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label x:Name="lblSelecionado"
+       Text="Nenhum aluno selecionado"
+       FontAttributes="Bold"/>
+
+            <Picker x:Name="pickerTurma"
+        Title="Selecione a turma"/>
+
+            
+            <Button Text="Matricular"
+                    BackgroundColor="#2E7D32"
+                    TextColor="White"
+                    Clicked="OnMatricularClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

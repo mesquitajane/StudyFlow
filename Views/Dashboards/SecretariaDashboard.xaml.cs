@@ -25,4 +25,5 @@ public partial class SecretariaDashboard : ContentPage
     {
         await Navigation.PushAsync(new MatriculasTurmasPage());
     }
+
 }

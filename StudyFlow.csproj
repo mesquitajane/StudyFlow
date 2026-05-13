@@ -103,6 +103,9 @@
 	  <MauiXaml Update="Views\SecretariaPages\ListarTurmasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SecretariaPages\MatricularAlunoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SecretariaPages\MatriculasTurmasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
