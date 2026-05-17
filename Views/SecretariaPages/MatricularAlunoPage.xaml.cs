@@ -4,13 +4,22 @@ using StudyFlow.Data.Models;
 
 namespace StudyFlow.Views.SecretariaPages;
 
+public class AlunoBusca
+{
+    public int IdAluno { get; set; }
+    public string Nome { get; set; } = "";
+    public string CPF { get; set; } = "";
+    public string Turma { get; set; } = "";
+    public string Email { get; set; } = "";
+}
+
 public partial class MatricularAlunoPage : ContentPage
 {
     private readonly StudyFlowDatabaseService _db = new();
 
     private List<Aluno> _listaFiltrada = new();
     private List<Turma> _turmas = new();
-    private dynamic? _alunoSelecionado;
+    private AlunoBusca? _alunoSelecionado;
 
     public MatricularAlunoPage()
     {
@@ -46,19 +55,22 @@ public partial class MatricularAlunoPage : ContentPage
 
         var filtrados = alunos
             .Where(a =>
-                a.CPF.Contains(texto) ||
-                usuarios.Any(u => u.IdUsuario == a.IdUsuario &&
-                                 u.Nome.ToLower().Contains(texto)))
+            {
+                var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
+
+                return a.CPF.Contains(texto) ||
+                       (user != null && user.Nome.ToLower().Contains(texto));
+            })
             .Select(a =>
             {
                 var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
 
-                return new
+                return new AlunoBusca
                 {
-                    a.IdAluno,
+                    IdAluno = a.IdAluno,
                     Nome = user?.Nome ?? "Sem nome",
-                    a.CPF,
-                    a.Turma,
+                    CPF = a.CPF,
+                    Turma = a.Turma,
                     Email = user?.Email ?? ""
                 };
             })
@@ -69,7 +81,7 @@ public partial class MatricularAlunoPage : ContentPage
     }
     private async void OnAlunoSelecionado(object sender, SelectionChangedEventArgs e)
     {
-        _alunoSelecionado = e.CurrentSelection.FirstOrDefault();
+        _alunoSelecionado = e.CurrentSelection.FirstOrDefault() as AlunoBusca;
 
         if (_alunoSelecionado == null)
             return;
@@ -93,10 +105,8 @@ public partial class MatricularAlunoPage : ContentPage
             return;
         }
 
-        var alunos = await _db.ListarAlunosAsync();
-
-        var aluno = alunos.FirstOrDefault(a =>
-            a.IdAluno == (int)_alunoSelecionado.IdAluno);
+        var aluno = (await _db.ListarAlunosAsync())
+            .FirstOrDefault(a => a.IdAluno == _alunoSelecionado.IdAluno);
 
         if (aluno == null)
         {
@@ -104,9 +114,10 @@ public partial class MatricularAlunoPage : ContentPage
             return;
         }
 
+        //  regra: não pode ter mais de uma turma
         if (!string.IsNullOrEmpty(aluno.Turma))
         {
-            await DisplayAlert("Erro", "Aluno já está matriculado em uma turma", "OK");
+            await DisplayAlert("Erro", "Este aluno já está matriculado em uma turma", "OK");
             return;
         }
 
@@ -116,7 +127,7 @@ public partial class MatricularAlunoPage : ContentPage
 
         await DisplayAlert("Sucesso", "Aluno matriculado com sucesso!", "OK");
 
-        // limpa tela
+        // limpar tela
         _alunoSelecionado = null;
         lblSelecionado.Text = "Nenhum aluno selecionado";
         entryCpf.Text = "";

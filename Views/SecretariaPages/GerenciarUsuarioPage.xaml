@@ -33,6 +33,7 @@
 
                     <Picker x:Name="pickerTipoUsuario"
                             Title="Selecione o tipo de usuário"
+                            SelectedIndexChanged="OnTipoUsuarioChanged"
                             TextColor="Black" TitleColor="Gray">
                         <Picker.Items>
                             <x:String>Aluno</x:String>
@@ -41,6 +42,11 @@
                             <x:String>Secretaria</x:String>
                         </Picker.Items>
                     </Picker>
+
+                    <Entry x:Name="entryCpf"
+                      Placeholder="CPF do aluno"
+                      Keyboard="Numeric"
+                      IsVisible="False"/>
 
                     <Button Text="Cadastrar Usuário" 
                             Clicked="OnCadastrarUsuarioClicked"

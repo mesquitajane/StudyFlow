@@ -2,17 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StudyFlow.Views.SecretariaPages.ListarMatriculas"
-             Title="Listar Matrículas"
              BackgroundColor="#E8F5E9">
 
-    <VerticalStackLayout Padding="15" Spacing="10">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="15" Spacing="10">
 
         <Label Text="Matrículas de Alunos"
                FontSize="22"
                FontAttributes="Bold"
                TextColor="#2E7D32"/>
 
-        
+        <SearchBar x:Name="searchAlunos"
+                   Placeholder="Buscar por nome ou CPF"
+                   TextChanged="OnPesquisarAlunoTextChanged"/>
+
+
         <CollectionView x:Name="listaAlunos"
                         SelectionChanged="OnAlunoSelecionado"
                         SelectionMode="Single">
@@ -60,5 +65,7 @@
         </Frame>
 
     </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.RelatoriosGeraisPage"
+             BackgroundColor="#E8F5E9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Relatórios Gerais"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"
+                   HorizontalOptions="Center"/>
+
+
+            <Frame BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="lblTotalAlunos"/>
+                    <Label x:Name="lblTotalProfessores"/>
+                    <Label x:Name="lblTotalResponsaveis"/>
+                    <Label x:Name="lblTotalTurmas"/>
+                    <Label x:Name="lblMatriculados"/>
+                    <Label x:Name="lblSemTurma"/>
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <Label Text="Alunos por Turma"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"/>
+
+
+            <CollectionView x:Name="listaRelatorioTurmas">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="0,5" BackgroundColor="White">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Turma}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"/>
+
+                                <Label Text="{Binding Alunos}"
+                                       LineBreakMode="WordWrap"/>
+
+                            </VerticalStackLayout>
+                            
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Voltar"
+                    Clicked="OnVoltarClicked"
+                    BackgroundColor="#C62828"
+                    TextColor="White"
+                    CornerRadius="10"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -26,4 +26,8 @@ public partial class SecretariaDashboard : ContentPage
         await Navigation.PushAsync(new MatriculasTurmasPage());
     }
 
+    private async void OnRelatoriosGeraisClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new RelatoriosGeraisPage());
+    }
 }

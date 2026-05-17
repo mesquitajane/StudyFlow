@@ -26,25 +26,26 @@ public partial class ListarMatriculas : ContentPage
         await _db.InitAsync();
 
         var alunos = await _db.ListarAlunosAsync();
-
         var usuarios = await _db.ListarUsuariosAsync();
 
-        var lista = alunos.Select(a =>
-        {
-            var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
+        var lista = alunos
+            .Join(
+                usuarios,
+                aluno => aluno.IdUsuario,
+                usuario => usuario.IdUsuario,
+                (aluno, usuario) => new
+                {
+                    aluno.IdAluno,
+                    aluno.CPF,
+                    aluno.Turma,
+                    aluno.IdUsuario,
+                    Nome = usuario.Nome,
+                    Email = usuario.Email
+                })
+            .OrderBy(x => x.Nome)
+            .ToList();
 
-            return new
-            {
-                a.IdAluno,
-                a.CPF,
-                a.Turma,
-                a.IdUsuario,
-                Nome = user?.Nome ?? "Sem nome"
-            };
-        })
-        .OrderBy(x => x.Nome)
-        .ToList();
-
+        listaAlunos.ItemsSource = null;
         listaAlunos.ItemsSource = lista;
     }
 
@@ -59,22 +60,22 @@ public partial class ListarMatriculas : ContentPage
         var type = item.GetType();
 
         int idAluno = (int)type.GetProperty("IdAluno")!.GetValue(item)!;
-        string nome = (string)type.GetProperty("Nome")!.GetValue(item)!;
-        string cpf = (string)type.GetProperty("CPF")!.GetValue(item)!;
-        string turma = (string)type.GetProperty("Turma")!.GetValue(item)!;
 
-        _alunoSelecionado = new Aluno
-        {
-            IdAluno = idAluno,
-            CPF = cpf,
-            Turma = turma
-        };
+        var alunos = await _db.ListarAlunosAsync();
 
-        lblNome.Text = nome; 
-        lblCPF.Text = cpf;
-        lblTurma.Text = turma;
+        _alunoSelecionado = alunos.FirstOrDefault(a => a.IdAluno == idAluno);
 
-        listaAlunos.IsVisible = false;
+        if (_alunoSelecionado == null)
+            return;
+
+        var usuarios = await _db.ListarUsuariosAsync();
+
+        var user = usuarios.FirstOrDefault(u => u.IdUsuario == _alunoSelecionado.IdUsuario);
+
+        lblNome.Text = user?.Nome ?? "Sem nome";
+        lblCPF.Text = _alunoSelecionado.CPF;
+        lblTurma.Text = _alunoSelecionado.Turma;
+        lblEmail.Text = user?.Email ?? "Sem email";
 
         pickerTurmaEditar.ItemsSource = (await _db.ListarTurmasAsync())
             .Select(t => t.Nome)
@@ -118,5 +119,40 @@ public partial class ListarMatriculas : ContentPage
         _alunoSelecionado = null;
 
         await CarregarAlunos();
+    }
+
+    private async void OnPesquisarAlunoTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string texto = e.NewTextValue?.Trim().ToLower() ?? "";
+
+        var alunos = await _db.ListarAlunosAsync();
+        var usuarios = await _db.ListarUsuariosAsync();
+
+        var lista = alunos
+            .Where(a =>
+            {
+                var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
+
+                return a.CPF.Contains(texto) ||
+                       (user != null && user.Nome.ToLower().Contains(texto));
+            })
+            .Select(a =>
+            {
+                var user = usuarios.FirstOrDefault(u => u.IdUsuario == a.IdUsuario);
+
+                return new
+                {
+                    a.IdAluno,
+                    a.CPF,
+                    a.Turma,
+                    a.IdUsuario,
+                    Nome = user?.Nome ?? "Sem nome"
+                };
+            })
+            .OrderBy(x => x.Nome)
+            .ToList();
+
+        listaAlunos.ItemsSource = null;
+        listaAlunos.ItemsSource = lista;
     }
 }

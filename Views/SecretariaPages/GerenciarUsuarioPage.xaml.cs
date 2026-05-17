@@ -20,6 +20,7 @@ public partial class GerenciarUsuarioPage : ContentPage
     private async void OnCadastrarUsuarioClicked(object sender, EventArgs e)
     {
         string nome = entryNome.Text?.Trim();
+        string cpf = entryCpf.Text?.Trim();
         string email = entryEmail.Text?.Trim();
         string senha = entrySenha.Text?.Trim();
         string tipo = pickerTipoUsuario.SelectedItem?.ToString();
@@ -60,8 +61,6 @@ public partial class GerenciarUsuarioPage : ContentPage
         }
         else
         {
-
-
             Usuario novoUsuario = new Usuario
             {
                 Nome = nome,
@@ -71,6 +70,22 @@ public partial class GerenciarUsuarioPage : ContentPage
             };
 
             await _db.InserirUsuarioAsync(novoUsuario);
+
+            if (tipo == "Aluno")
+            {
+                if (string.IsNullOrWhiteSpace(cpf))
+                {
+                    await DisplayAlert("Erro", "Informe o CPF do aluno", "OK");
+                    return;
+                }
+
+                await _db.InserirAlunoAsync(new Aluno
+                {
+                    IdUsuario = novoUsuario.IdUsuario,
+                    CPF = cpf,
+                    Turma = ""
+                });
+            }
 
             await DisplayAlert("Sucesso", "Usuário cadastrado com sucesso!", "OK");
 
@@ -165,5 +180,12 @@ public partial class GerenciarUsuarioPage : ContentPage
     private async void OnVoltarClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
+    }
+
+    private void OnTipoUsuarioChanged(object sender, EventArgs e)
+    {
+        string tipo = pickerTipoUsuario.SelectedItem?.ToString();
+
+        entryCpf.IsVisible = tipo == "Aluno";
     }
 }
