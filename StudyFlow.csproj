@@ -85,6 +85,9 @@
 	  <MauiXaml Update="Views\SecretariaPages\CadastrarTurmaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SecretariaPages\ConfiguracoesSistemaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SecretariaPages\GerenciarUsuarioPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

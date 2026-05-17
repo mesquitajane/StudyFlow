@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.ConfiguracoesSistemaPage"
+             BackgroundColor="#E8F5E9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="20">
+
+            <Label Text="Configurações do Sistema"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#2E7D32"
+                   HorizontalOptions="Center"/>
+
+            <!-- SEGURANÇA -->
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="15"
+                   BorderColor="#C8E6C9">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Alterar Senha"
+                           FontAttributes="Bold"
+                           TextColor="#2E7D32"/>
+
+                    <Entry x:Name="entryNovaSenha"
+                           Placeholder="Nova senha"
+                           IsPassword="True"/>
+
+                    <Entry x:Name="entryConfirmarSenha"
+                           Placeholder="Confirmar nova senha"
+                           IsPassword="True"/>
+
+                    <Button Text="Salvar nova senha"
+                            Clicked="OnSalvarSenhaClicked"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            CornerRadius="10"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ALTERAR EMAIL -->
+            <Frame BackgroundColor="White"
+       CornerRadius="10"
+       Padding="15"
+       BorderColor="#C8E6C9">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Alterar Email"
+               FontAttributes="Bold"
+               TextColor="#2E7D32"/>
+
+                    <Entry x:Name="entryNovoEmail"
+               Placeholder="Novo email"
+               Keyboard="Email"/>
+
+                    <Entry x:Name="entryConfirmarEmail"
+               Placeholder="Confirmar novo email"
+               Keyboard="Email"/>
+
+                    <Button Text="Salvar novo email"
+                            Clicked="OnSalvarEmailClicked"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            CornerRadius="10"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SOBRE -->
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="15"
+                   BorderColor="#C8E6C9">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Sobre o Sistema"
+                           FontAttributes="Bold"
+                           TextColor="#2E7D32"/>
+
+                    <Label Text="StudyFlow"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+
+                    <Label Text="Versão 1.0"/>
+
+                    <Label Text="Sistema de gestão escolar."/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- VOLTAR -->
+            <Button Text="Voltar"
+                    Clicked="OnVoltarClicked"
+                    BackgroundColor="#C62828"
+                    TextColor="White"
+                    CornerRadius="10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

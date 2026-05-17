@@ -30,4 +30,9 @@ public partial class SecretariaDashboard : ContentPage
     {
         await Navigation.PushAsync(new RelatoriosGeraisPage());
     }
+
+    private async void OnConfiguaracoesSistema(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ConfiguracoesSistemaPage());
+    }
 }
