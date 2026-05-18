@@ -185,6 +185,31 @@ public class StudyFlowDatabaseService
         }).OrderByDescending(x => x.Relatorio.DataRegistro).ToList();
     }
 
+    public async Task<List<RelatorioComportamentalView>> ListarRelatoriosPorProfessorAsync(int idProfessor)
+    {
+        await InitAsync();
+
+        // Busca os relatórios do professor
+        var relatorios = await _database.Table<RelatorioComportamental>()
+                                        .Where(r => r.IdProfessor == idProfessor)
+                                        .ToListAsync();
+
+        var professores = await ListarProfessoresAsync();
+        var usuarios = await ListarUsuariosAsync();
+
+        // Faz um "Join" em memória para pegar o nome do professor
+        return relatorios.Select(r => {
+            var prof = professores.FirstOrDefault(p => p.IdProfessor == r.IdProfessor);
+            var userProf = usuarios.FirstOrDefault(u => u.IdUsuario == prof?.IdUsuario);
+
+            return new RelatorioComportamentalView
+            {
+                Relatorio = r,
+                NomeProfessor = userProf?.Nome ?? "Professor Removido"
+            };
+        }).OrderByDescending(x => x.Relatorio.DataRegistro).ToList();
+    }
+
     public async Task<Aluno> BuscarAlunoPorCpfAsync(string cpf)
     {
         await InitAsync();

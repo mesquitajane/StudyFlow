@@ -79,6 +79,9 @@
 	  <MauiXaml Update="Views\Relatorios\ListaRelatoriosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Relatorios\ListaRelatoriosProfPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Relatorios\MinhasNotasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

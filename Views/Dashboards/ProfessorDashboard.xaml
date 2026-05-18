@@ -13,6 +13,7 @@
             <VerticalStackLayout Spacing="10">
                 <Button Text="Lançar Notas" Clicked="OnLancarNotasClicked" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
                 <Button Text="Relatório Comportamental" Clicked="OnRelatorioClicked" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
+                <Button Text="Ver Relatórios Comportamentais" Clicked="OnVerComportamentoClicked" BackgroundColor="#2E7D32" TextColor="White"/>
                 <Button Text="Minhas Turmas" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>
                 <Button Text="Cadastrar Tarefa" Clicked="OnCadastrarTarefaClicked" BackgroundColor="#2E7D32" TextColor="White"/>
                 <Button Text="Ver Tarefas" Clicked="OnVerTarefasClicked" BackgroundColor="#2E7D32" TextColor="White" HeightRequest="60"/>

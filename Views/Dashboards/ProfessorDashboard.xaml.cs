@@ -52,6 +52,19 @@ public partial class ProfessorDashboard : ContentPage
         await Navigation.PushAsync(new CriarRelatorioPage(_usuario));
     }
 
+    private async void OnVerComportamentoClicked(object sender, EventArgs e)
+    {
+        var professores = await _db.ListarProfessoresAsync();
+        var professor = professores.FirstOrDefault(p => p.IdUsuario == _usuario.IdUsuario);
+
+        if (professor == null)
+        {
+            await DisplayAlert("Erro", "Professor não encontrado.", "OK");
+            return;
+        }
+
+        await Navigation.PushAsync(new ListaRelatoriosProfPage(professor.IdProfessor));
+    }
     private async void OnLancarNotasClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new LancamentoNotasPage(_usuario));
