@@ -177,3 +177,16 @@ public class Turma
 
     public string? Nivel { get; set; }
 }
+
+public class Comunicado
+{
+    [PrimaryKey, AutoIncrement]
+    public int IdComunicado { get; set; }
+
+    public string Titulo { get; set; }
+    public string Mensagem { get; set; }
+    public DateTime DataPublicacao { get; set; }
+
+    // Pode ser: "Todos", "Alunos", "Professores", "Responsáveis"
+    public string PublicoAlvo { get; set; }
+}

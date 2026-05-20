@@ -2,6 +2,7 @@ using StudyFlow.Data.Models;
 using StudyFlow.Views.Tarefas;
 using StudyFlow.Data;
 using StudyFlow.Views.Relatorios;
+using StudyFlow.Views.SecretariaPages;
 
 namespace StudyFlow.Views.Dashboards;
 
@@ -50,5 +51,10 @@ public partial class AlunoDashboard : ContentPage
         var eu = alunos.FirstOrDefault(a => a.IdUsuario == _usuarioLogado.IdUsuario);
         // 2. Abre a página de notas passando o ID do aluno
         await Navigation.PushAsync(new MinhasNotasPage(eu.IdAluno));
+    }
+
+    private async void OnVerAvisosClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MuralAvisosPage(_usuarioLogado));
     }
 }

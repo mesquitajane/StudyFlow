@@ -2,6 +2,7 @@ using StudyFlow.Data.Models;
 using StudyFlow.Data;
 using StudyFlow.Views.Relatorios;
 using StudyFlow.Views.Autenticacao;
+using StudyFlow.Views.SecretariaPages;
 
 namespace StudyFlow.Views.Dashboards;
 
@@ -119,8 +120,13 @@ public partial class ResponsavelDashboard : ContentPage
             await DisplayAlert("Aviso", "Toque diretamente no card do filho que deseja avaliar o comportamento.", "OK");
         }
     }
+    // 5. BOTÃO GERAL DE AVISOS
+    private async void OnVerAvisosClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MuralAvisosPage(_usuarioLogado));
+    }
 
-    // 5. SAIR
+    // 6. SAIR
     private async void OnSairClicked(object sender, EventArgs e)
     {
         bool confirm = await DisplayAlert("Sair", "Deseja realmente sair?", "Sim", "Não");

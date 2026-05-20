@@ -49,7 +49,7 @@
                 <BoxView HeightRequest="1" Color="#E0E0E0" />
 
                 <Button Text="Ver Comportamento" Clicked="OnVerComportamentoClicked" BackgroundColor="#2E7D32" TextColor="White"/>
-                <Button Text="Comunicados da Escola" BackgroundColor="#2E7D32" TextColor="White"/>
+                <Button Text="Comunicados da Escola" BackgroundColor="#2E7D32" TextColor="White"  Clicked="OnVerAvisosClicked"/>
                 <Button Text="Falar com a Secretaria" BackgroundColor="#2E7D32" TextColor="White"/>
                 <Button Text="Sair" Clicked="OnSairClicked" BackgroundColor="#C62828" TextColor="White" Margin="0,10,0,0"/>
             </VerticalStackLayout>

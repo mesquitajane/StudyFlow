@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudyFlow.Views.SecretariaPages.CadastrarComunicadoPage"
+             BackgroundColor="#E8F5E9">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="15">
+            <Label x:Name="lblTituloPagina" Text="Novo Comunicado" FontSize="26" FontAttributes="Bold" 
+                   TextColor="#2E7D32" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Título:" TextColor="#2E7D32" FontAttributes="Bold"/>
+                <Entry x:Name="entryTitulo" Placeholder="Ex: Reunião de Pais" 
+                       TextColor="Black" PlaceholderColor="Gray" BackgroundColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Público Alvo:" TextColor="#2E7D32" FontAttributes="Bold"/>
+                <Frame Padding="0" CornerRadius="10" HasShadow="False" BorderColor="Transparent">
+                    <Picker x:Name="pickerPublico" Title="Selecione quem vai ler" 
+                            TextColor="Black" BackgroundColor="White" TitleColor="Gray">
+                        <Picker.Items>
+                            <x:String>Todos</x:String>
+                            <x:String>Alunos</x:String>
+                            <x:String>Professores</x:String>
+                            <x:String>Responsáveis</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Mensagem:" TextColor="#2E7D32" FontAttributes="Bold"/>
+                <Frame Padding="5" CornerRadius="10" BackgroundColor="White">
+                    <Editor x:Name="editorMensagem" Placeholder="Escreva o comunicado aqui..."
+                            HeightRequest="180" TextColor="Black" BackgroundColor="White"/>
+                </Frame>
+            </VerticalStackLayout>
+
+            <Button Text="Publicar Comunicado" Clicked="OnSalvarClicked" 
+                    BackgroundColor="#4CAF50" TextColor="White" CornerRadius="10" Margin="0,15,0,0" HeightRequest="50"/>
+
+            <Button Text="Cancelar" Clicked="OnCancelarClicked" 
+                    BackgroundColor="#757575" TextColor="White" CornerRadius="10" HeightRequest="50"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -2,6 +2,7 @@ using StudyFlow.Data;
 using StudyFlow.Data.Models;
 using StudyFlow.Views.Tarefas;
 using StudyFlow.Views.Relatorios;
+using StudyFlow.Views.SecretariaPages;
 
 namespace StudyFlow.Views.Dashboards;
 
@@ -64,6 +65,11 @@ public partial class ProfessorDashboard : ContentPage
         }
 
         await Navigation.PushAsync(new ListaRelatoriosProfPage(professor.IdProfessor));
+    }
+
+    private async void OnVerAvisosClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MuralAvisosPage(_usuario));
     }
     private async void OnLancarNotasClicked(object sender, EventArgs e)
     {

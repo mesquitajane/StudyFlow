@@ -12,7 +12,7 @@ public class StudyFlowDatabaseService
         if (_database != null)
             return;
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow4.db3");
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "studyflow5.db3");
         _database = new SQLiteAsyncConnection(dbPath);
 
         await _database.CreateTableAsync<Usuario>();
@@ -25,6 +25,7 @@ public class StudyFlowDatabaseService
         await _database.CreateTableAsync<RelatorioComportamental>();
         await _database.CreateTableAsync<Entrega>();
         await _database.CreateTableAsync<Turma>();
+        await _database.CreateTableAsync<Comunicado>();
     }
 
     public async Task<int> InserirUsuarioAsync(Usuario usuario)
@@ -288,5 +289,43 @@ public class StudyFlowDatabaseService
     public async Task<int> DeletarAlunoAsync(Aluno aluno)
     {
         return await _database.DeleteAsync(aluno);
+    }
+
+    public async Task<int> SalvarComunicadoAsync(Comunicado comunicado)
+    {
+        await InitAsync();
+        if (comunicado.IdComunicado != 0)
+            return await _database.UpdateAsync(comunicado); // Edita
+        else
+            return await _database.InsertAsync(comunicado); // Cria novo
+    }
+
+    public async Task<List<Comunicado>> ListarComunicadosAsync()
+    {
+        await InitAsync();
+        return await _database.Table<Comunicado>().OrderByDescending(c => c.DataPublicacao).ToListAsync();
+    }
+
+    public async Task<int> ExcluirComunicadoAsync(int id)
+    {
+        await InitAsync();
+        return await _database.DeleteAsync<Comunicado>(id);
+    }
+
+    public async Task<List<Comunicado>> ListarComunicadosPorPublicoAsync(List<string> publicosAlvo)
+    {
+        await InitAsync();
+
+        // Busca todos os comunicados do banco
+        var todosComunicados = await _database.Table<Comunicado>()
+                                              .OrderByDescending(c => c.DataPublicacao)
+                                              .ToListAsync();
+
+        // Filtra no C# usando a lista de públicos permitidos
+        var comunicadosFiltrados = todosComunicados
+                                   .Where(c => publicosAlvo.Contains(c.PublicoAlvo))
+                                   .ToList();
+
+        return comunicadosFiltrados;
     }
 }

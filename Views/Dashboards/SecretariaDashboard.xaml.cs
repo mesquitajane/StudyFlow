@@ -35,4 +35,11 @@ public partial class SecretariaDashboard : ContentPage
     {
         await Navigation.PushAsync(new ConfiguracoesSistemaPage());
     }
+
+    private async void OnComunicadosClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ComunicadosPage());
+    }
+
+    
 }
